@@ -270,7 +270,7 @@
                                     <span class="m-form__help">`</span>
                                 </div>
                             @endif
-                            <div class="col-lg-6">
+                            <!-- <div class="col-lg-6">
                                 <label>
                                     Rencana Jangka Waktu Pekerjaan:
                                 </label>
@@ -278,7 +278,7 @@
                                        id="rencana" name="rencana"
                                        placeholder="Masukan Rencana ">
                                 <span class="m-form__help"></span>
-                            </div>
+                            </div> -->
                             <div class="col-lg-6">
                                 <label>
                                     Tempat Penyerahan
@@ -287,13 +287,22 @@
                                         name="tempat_penyerahan">
                                     @foreach ($dataTempatPenyerahan as $key)
                                         <option
-                                            value="{{$key->nama}}" {{($dataPengadaan->tempat_penyerahan == $key->nama) ?"selected":''}}>
+                                            value="{{$key->nama}}" data-id="{{$key->id}}" {{($dataPengadaan->tempat_penyerahan == $key->nama) ?"selected":''}}>
                                             {{$key->nama}}
                                         </option>
                                     @endforeach
 
                                 </select>
                                 <span class="m-form__help">`</span>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>
+                                    Alamat Penyerahan:
+                                </label>
+                                <input type="text" class="form-control m-input alamat_penyerahan" value="{{$dataPengadaan->alamat_penyerahan}}"
+                                       id="alamat_penyerahan" name="alamat_penyerahan" readonly
+                                       placeholder="Alamat Penyerahan">
+                                <span class="m-form__help"></span>
                             </div>
                             <div class="col-lg-6">
                                 <label>
@@ -400,32 +409,85 @@
                         </div>
 
                         <div class="form-group m-form__group row">
-                            <div class="col-lg-6">
+{{--                            <div class="col-lg-6">--}}
+{{--                                <label>--}}
+{{--                                    VFMC 1--}}
+{{--                                </label>--}}
+{{--                                <select class="form-control vfmc" id="vfmc" name="vfmc">--}}
+{{--                                    @foreach ($dataVfmc as $key)--}}
+{{--                                        <option--}}
+{{--                                            value="{{$key->nama}}" {{($dataPengadaan->vfmc == $key->nama) ?"selected":''}}>--}}
+{{--                                            {{$key->nama}}--}}
+{{--                                        </option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                                <span class="m-form__help">`</span>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-lg-6">--}}
+{{--                                <label>--}}
+{{--                                    VFMC 2--}}
+{{--                                </label>--}}
+{{--                                <select class="form-control vfmc2" id="vfmc2" name="vfmc2">--}}
+{{--                                    @foreach ($dataVfmc as $key)--}}
+{{--                                        <option--}}
+{{--                                            value="{{$key->nama}}" {{($dataPengadaan->vfmc2 == $key->nama) ?"selected":''}}>--}}
+{{--                                            {{$key->nama}}--}}
+{{--                                        </option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                                <span class="m-form__help"></span>--}}
+{{--                            </div>--}}
+<div class="col-lg-6">
                                 <label>
-                                    VFMC 1
+                                    Jabatan Direksi
                                 </label>
-                                <select class="form-control vfmc" id="vfmc" name="vfmc">
-                                    @foreach ($dataVfmc as $key)
+                                <select class="form-control jabatan_direksi" id="jabatan_direksi" name="jabatan_direksi">
+                                    @foreach ($dataJabatanDireksi as $key)
                                         <option
-                                            value="{{$key->nama}}" {{($dataPengadaan->vfmc == $key->nama) ?"selected":''}}>
-                                            {{$key->nama}}
+                                            value="{{ $key->bagian }}" data-id="{{$key->nama}}" {{($dataPengadaan->jabatan_direksi == $key->nama) ?"selected":''}}>
+                                            {{ $key->bagian}}
                                         </option>
                                     @endforeach
                                 </select>
-                                <span class="m-form__help">`</span>
+                                <span class="m-form__help"></span>
                             </div>
                             <div class="col-lg-6">
                                 <label>
-                                    VFMC 2
+                                    Direksi:
                                 </label>
-                                <select class="form-control vfmc2" id="vfmc2" name="vfmc2">
-                                    @foreach ($dataVfmc as $key)
-                                        <option
-                                            value="{{$key->nama}}" {{($dataPengadaan->vfmc2 == $key->nama) ?"selected":''}}>
-                                            {{$key->nama}}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <input type="text" class="form-control m-input direksi" value="{{$dataPengadaan->direksi}}"
+                                       id="direksi" name="direksi"
+                                       placeholder="Direksi">
+                                <span class="m-form__help"></span>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>
+                                    No Keputusan Direksi:
+                                </label>
+                                <input type="text" class="form-control m-input" value="{{$dataPengadaan->no_keputusan_direksi}}"
+                                       id="no_keputusan_direksi" name="no_keputusan_direksi"
+                                       placeholder="Masukan No Keputusan Direksi">
+                                <span class="m-form__help"></span>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>
+                                   Tanggal Keputusan Direksi:
+                                </label>
+                                <input
+                                    value="{{$dataPengadaan->tanggal_keputusan_direksi}}"
+                                    name="tanggal_keputusan_direksi"
+                                    id="tanggal_keputusan_direksi"
+                                    type='text' class="form-control  m-input tanggal_keputusan_direksi" readonly
+                                    placeholder="Tanggal Keputusan Direksi"/>
+                                <span class="m-form__help"></span>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>
+                                    Nip:
+                                </label>
+                                <input type="text" class="form-control m-input" value="{{$dataPengadaan->nip}}" id="nip"
+                                       name="nip"
+                                       placeholder="Masukan Nip">
                                 <span class="m-form__help"></span>
                             </div>
                             <div class="col-lg-6">
@@ -456,27 +518,15 @@
                                        placeholder="Masukan Pejabat Pelaksana">
                                 <span class="m-form__help"></span>
                             </div>
-                            <div class="col-lg-6">
-                                <label>
-                                    Direksi:
-                                </label>
-                                <input type="text" class="form-control m-input" value="{{$dataPengadaan->direksi}}"
-                                       id="direksi" name="direksi"
-                                       placeholder="Masukan Direksi">
-                                <span class="m-form__help"></span>
-                            </div>
+                            
                             <div class="col-lg-6">
                                 <label>
                                     Pengawas
                                 </label>
-                                <select class="form-control pengawas" id="pengawas" name="pengawas">
-                                    @foreach ($dataPengawas as $key)
-                                        <option
-                                            value="{{$key->nama}}" {{($dataPengadaan->pengawas == $key->nama) ?"selected":''}}>
-                                            {{$key->nama}}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <input type="text" class="form-control m-input pengawas" value="{{$dataPengadaan->pengawas}}"
+                                       id="pengawas" name="pengawas"
+                                       placeholder="Pengawas">
+                              
                                 <span class="m-form__help"></span>
                             </div>
                             <div class="col-lg-6">
@@ -493,15 +543,15 @@
                                 </select>
                                 <span class="m-form__help">`</span>
                             </div>
-                            <div class="col-lg-6">
-                                <label>
-                                    Ketua Tim:
-                                </label>
-                                <input type="text" class="form-control m-input" value="{{$dataPengadaan->ketua_tim}}"
-                                       id="direksi" id="ketua_tim" name="ketua_tim"
-                                       placeholder="Masukan Ketua Tim">
-                                <span class="m-form__help"></span>
-                            </div>
+{{--                            <div class="col-lg-6">--}}
+{{--                                <label>--}}
+{{--                                    Ketua Tim:--}}
+{{--                                </label>--}}
+{{--                                <input type="text" class="form-control m-input" value="{{$dataPengadaan->ketua_tim}}"--}}
+{{--                                       id="direksi" id="ketua_tim" name="ketua_tim"--}}
+{{--                                       placeholder="Masukan Ketua Tim">--}}
+{{--                                <span class="m-form__help"></span>--}}
+{{--                            </div>--}}
                             <div class="col-lg-6">
                                 <label>
                                     PIC Pelaksana
@@ -613,12 +663,13 @@
                             </div>
                             <div class="col-lg-6">
                                 <label>
-                                    Harga Kontrak:
+                                    Harga Nego:
                                 </label>
                                 <input type="text" class="form-control m-input"
-                                       value="{{$dataPengadaan->harga_kontrak}}"
+                                readonly
+                                       value="{{$dataPengadaan->nilai_kontrak}}"
                                        id="harga_kontrak" name="harga_kontrak"
-                                       placeholder="Masukan Harga Kontrak">
+                                       placeholder="Masukan Harga Nego">
                                 <span class="m-form__help"></span>
                             </div>
                             <div class="col-lg-6">
@@ -801,10 +852,6 @@
                     </div>
                     <div class="form-group m-form__group row">
                         <div class="col-lg-6">
-                            <a href="{!!url('user/jobcard/download-spkBarang/')!!}"
-                               class="btn btn-brand btn-sm">
-                                Download SPK Barang
-                            </a>
                             <a href="{!!url('user/jobcard/download-daftarKuantitas/')!!}"
                                class="btn btn-brand btn-sm">
                                 Download Daftar Kuantitas Barang
@@ -844,9 +891,6 @@
                         </div>
                     </div>
                 </form>
-                {{--                <div class="progress">--}}
-                {{--                    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>--}}
-                {{--                </div>--}}
             </div>
         </div>
     </div>

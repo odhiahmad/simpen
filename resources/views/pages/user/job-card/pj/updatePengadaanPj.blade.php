@@ -270,7 +270,7 @@
 {{--                                    <span class="m-form__help">`</span>--}}
 {{--                                </div>--}}
                             @endif
-                            <div class="col-lg-6">
+                            <!-- <div class="col-lg-6">
                                 <label>
                                     Rencana Jangka Waktu Pekerjaan:
                                 </label>
@@ -278,7 +278,7 @@
                                        id="rencana" name="rencana"
                                        placeholder="Masukan Rencana ">
                                 <span class="m-form__help"></span>
-                            </div>
+                            </div> -->
                             <div class="col-lg-6">
                                 <label>
                                     Tempat Penyerahan

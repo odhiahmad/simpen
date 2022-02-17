@@ -46,7 +46,7 @@
                 var _token = $('input[name="_token"]').val()
 
                 $.ajax({
-                    url: "{{route('jobcard.spk.barang.fetch')}}",
+                    url: "{{route('jobcard.spk.fetch')}}",
                     method: "POST",
                     data: {select: select, value: value, _token: _token, dependent: dependent},
                     success: function (result) {
@@ -67,7 +67,7 @@
                 var _token = $('input[name="_token"]').val()
 
                 $.ajax({
-                    url: "{{route('jobcard.spk.barang.fetchJenis1')}}",
+                    url: "{{route('jobcard.spk.fetchJenis1')}}",
                     method: "POST",
                     data: {select: select, value: value, _token: _token, dependent: dependent},
                     success: function (result) {
@@ -89,7 +89,7 @@
                 var _token = $('input[name="_token"]').val()
 
                 $.ajax({
-                    url: "{{route('jobcard.spk.barang.fetch')}}",
+                    url: "{{route('jobcard.spk.fetch')}}",
                     method: "POST",
                     data: {select: select, value: value, _token: _token, dependent: dependent},
                     success: function (result) {
@@ -110,7 +110,7 @@
                 var _token = $('input[name="_token"]').val()
 
                 $.ajax({
-                    url: "{{route('jobcard.spk.barang.fetch')}}",
+                    url: "{{route('jobcard.spk.fetch')}}",
                     method: "POST",
                     data: {select: select, value: value, _token: _token, dependent: dependent},
                     success: function (result) {
@@ -122,6 +122,35 @@
         })
 
 
+        $('.tempat_penyerahan').change(function () {
+            if ($(this).val() != '') {
+
+                var select = $(this).attr("id");
+                var value = $(this).val();
+                var id = $('.tempat_penyerahan option:selected').data('id');
+                var dependent = $(this).data('dependent')
+                var _token = $('input[name="_token"]').val()
+
+                $.ajax({
+                    url: "{{route('jobcard.spbj.getAlamatPenyerahan')}}",
+                    method: "POST",
+                    data: {select: select,id:id, value: value, _token: _token, dependent: dependent},
+                    success: function (result) {
+                        $("#alamat_penyerahan").val(result.data.alamat);
+                    
+                    }
+                })
+            }
+        })
+
+        $('.jabatan_direksi').change(function () {
+            if ($(this).val() != '') {
+
+                $(".direksi").val($('.jabatan_direksi option:selected').data('id'));
+                
+            }
+        })
+
         $("#rab, #nilai_kontrak").keyup(function () {
             // $("#rab").val(CurrencyFormat($("#rab").val()));
             // $("#nilai_kontrak").val(CurrencyFormat( $("#nilai_kontrak").val()));
@@ -131,11 +160,11 @@
 
         });
 
-        $("#harga_penawaran").keyup(function () {
-            var harga_penawaran_get = $("#harga_penawaran").val();
+        $("#nilai_kontrak").keyup(function () {
+            var harga_penawaran_get = $("#nilai_kontrak").val();
 
-            $("#harga_kontrak").val(0.985 * harga_penawaran_get);
-            $("#nilai_jaminan").val((0.985 * harga_penawaran_get) * 0.05);
+            // $("#harga_kontrak").val(0.985 * harga_penawaran_get);
+            $("#nilai_jaminan").val((harga_penawaran_get) * 0.05);
         });
 
 
@@ -157,6 +186,12 @@
         $(".metode_pengadaan_jenis1").select2({
             placeholder: "Pilih Metode",
         });
+
+        $(".jabatan_direksi").select2({
+            placeholder: "Pilih Jabatan Direksi",
+        });
+
+        
         $(".pos_anggaran").select2({
             placeholder: "Pilih Pos Anggaran",
         });
@@ -197,9 +232,6 @@
         $("#vfmc2").select2({
             placeholder: "Pilih VFMC",
         });
-        $("#pengawas").select2({
-            placeholder: "Pilih Pengawas",
-        });
         $("#jabatan_pengawas").select2({
             placeholder: "Pilih Jabatan Pengawas",
         });
@@ -214,7 +246,7 @@
         var hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu",];
 
 
-        $("#tanggal_mulai,#tanggal_nota_dinas,#rks_tgl,#spk_tgl,#tanggal_diterima_panitia,#tanggal,#nd_penetapan_pemenang_tgl,#nd_usulan_tetap_pemenang_tgl,#ba_hasil_pengadaan_langsung_tgl,#survey_harga_pasar_tgl, #hps_tgl, #undangan_pengadaan_langsung_tgl,#pemasukan_dok_penawaran_tgl_sd,#pemasukan_dok_penawaran_tgl_dari,#evaluasi_dokumen_tgl_sd,#evaluasi_dokumen_tgl_dari,#ba_hasil_klarifikasi_tgl").datepicker({
+        $("#tanggal_keputusan_direksi,#tanggal_mulai,#tanggal_nota_dinas,#rks_tgl,#spk_tgl,#tanggal_diterima_panitia,#tanggal,#nd_penetapan_pemenang_tgl,#nd_usulan_tetap_pemenang_tgl,#ba_hasil_pengadaan_langsung_tgl,#survey_harga_pasar_tgl, #hps_tgl, #undangan_pengadaan_langsung_tgl,#pemasukan_dok_penawaran_tgl_sd,#pemasukan_dok_penawaran_tgl_dari,#evaluasi_dokumen_tgl_sd,#evaluasi_dokumen_tgl_dari,#ba_hasil_klarifikasi_tgl").datepicker({
             format: 'yyyy-mm-dd',
             todayHighlight: !0,
             orientation: "bottom left",
@@ -1171,7 +1203,7 @@
 
         });
 
-        $('#sample_form').on('submit', function (event) {
+        $('#sample_form').submit(function (event) {
             event.preventDefault();
             if ($('#action').val() == 'Add') {
                 $.ajax({
@@ -1186,19 +1218,19 @@
                         $('#action_button').val('Loading ...')
                     },
                     success: function (data) {
-                        if (data.errors) {
-                            $('#action_button').val('Submit')
-                            for (var count = 0; count < data.errors.length; count++) {
-                                toastr.error(data.errors[count])
-                            }
-
-                        }
-                        if (data.success) {
+                       if (data.success) {
                             toastr.success(data.success)
                             $('#action_button').val('Submit')
                         }
 
 
+                    },
+                    error:function (data) {
+                        for (var count = 0; count < data.errors.length; count++) {
+                            toastr.error(data.errors[count])
+                        }
+                        toastr.error(data.errors)
+                        $('#action_button').val('Submit')
                     }
                 });
 

@@ -30,7 +30,7 @@
                         <li class="m-nav__item">
                             <a href='#' class="m-nav__link">
                                 <span class="m-nav__link-text">
-                                    PJ
+                                    SPBJ
                                 </span>
                             </a>
                         </li>
@@ -173,6 +173,45 @@
 
 
             var user_id;
+
+            $('#user_table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "/user/jobcard/spbj/index",
+                },
+                columns: [
+                    {
+                        data: 'judul',
+                        name: 'judul'
+                    },
+                    {
+                        data: 'metode',
+                        name: 'metode,'
+                    },
+                    {
+                        data: 'rab',
+                        name: 'rab', render: $.fn.dataTable.render.number(',', '.', 2, 'Rp. ')
+                    },
+                    {
+                        data: 'info',
+                        name: 'info',
+                    },
+                    {
+                        data: 'pic_pelaksana',
+                        name: 'pic_pelaksana',
+                    },
+                    {
+                        data: 'warna',
+                        name: 'warna',
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        order: false
+                    },
+                ]
+            });
 
             $(document).on('click', '.info', function () {
                 var id = $(this).attr('id');
@@ -357,7 +396,7 @@
 
             $('#ok_button').click(function () {
                 $.ajax({
-                    url: "/user/jobcard/destroy/" + user_id,
+                    url: "/user/jobcard/spbj/destroy/" + user_id,
                     beforeSend: function () {
                         $('#ok_button').text('Deleting...');
                     },
@@ -373,44 +412,7 @@
             });
 
 
-            var t = $('#user_table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: {
-                    url: "/user/jobcard/spbj/index",
-                },
-                columns: [
-                    {
-                        data: 'judul',
-                        name: 'judul'
-                    },
-                    {
-                        data: 'metode',
-                        name: 'metode,'
-                    },
-                    {
-                        data: 'rab',
-                        name: 'rab', render: $.fn.dataTable.render.number(',', '.', 2, 'Rp. ')
-                    },
-                    {
-                        data: 'info',
-                        name: 'info',
-                    },
-                    {
-                        data: 'pic_pelaksana',
-                        name: 'pic_pelaksana',
-                    },
-                    {
-                        data: 'warna',
-                        name: 'warna',
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        order: false
-                    },
-                ]
-            });
+         
 
 
         });

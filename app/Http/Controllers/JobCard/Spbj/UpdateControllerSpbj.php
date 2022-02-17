@@ -21,34 +21,25 @@ class UpdateControllerSpbj extends Controller
         $dokumenKontrak = $request->file('kontrak_file');
         $dokumenProses = $request->file('proses_file');
 
-        $dokumenKontrakNama = $request->kontrak;
-        $dokumenProsesNama = $request->proses;
+
 
         $new_name = $request->kontrak;
         $new_name1 = $request->proses;
 
         if ($dokumenKontrak != '') {
-            $cekFoto = Pengadaan::where('id', $request->id)->first();
-            if ($cekFoto->kontrak != null) {
-                unlink(public_path('data-kontrak/kontrak/') . $dokumenKontrakNama);
-            }
+
 
             $image = $request->file('kontrak_file');
             $new_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('data-kontrak/kontrak'), $new_name);
+            $image->move(public_path('data-kontrak/kontrak/'.$request->id.'/'), $new_name);
 
         }
 
         if ($dokumenProses != '') {
-            $cekFoto = Pengadaan::where('id', $request->id)->first();
-            if ($cekFoto->proses != null) {
-                unlink(public_path('data-kontrak/proses/') . $dokumenProsesNama);
-            }
 
             $image1 = $request->file('proses_file');
-
             $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
-            $image1->move(public_path('data-kontrak/proses'), $new_name1);
+            $image1->move(public_path('data-kontrak/proses'.$request->id.'/'), $new_name1);
         }
 
 
@@ -76,6 +67,12 @@ class UpdateControllerSpbj extends Controller
         }
 
         $form_data_hari = array(
+
+            'rks_nomor' => $request->nppv8,
+            'rks_jumlah' => $request->rks_jumlah,
+            'rks_tgl' => $request->rks_tgl,
+            'rks_hari' => $request->rks_hari,
+
             'survey_harga_pasar_nomor' => $request->nppv1,
             'survey_harga_pasar_jumlah' => $request->survey_harga_pasar_jumlah,
             'survey_harga_pasar_tgl' => $request->survey_harga_pasar_tgl,
@@ -91,20 +88,18 @@ class UpdateControllerSpbj extends Controller
             'undangan_pengadaan_langsung_tgl' =>$request->pemasukan_dok_penawaran_tgl,
             'undangan_pengadaan_langsung_hari' => $request->undangan_pengadaan_langsung_hari,
 
+            'pemasukan_dok_penawaran_jumlah_dari' => $request->pemasukan_dok_penawaran_jumlah_dari,
+            'pemasukan_dok_penawaran_tgl_dari' =>$request->pemasukan_dok_penawaran_tgl_dari,
+            'pemasukan_dok_penawaran_hari_dari' => $request->pemasukan_dok_penawaran_hari_dari,
 
-
-            'pemasukan_dok_penawaran_nomor' => $request->nppv4,
             'pemasukan_dok_penawaran_jumlah' => $request->pemasukan_dok_penawaran_jumlah,
             'pemasukan_dok_penawaran_tgl' =>$request->pemasukan_dok_penawaran_tgl,
             'pemasukan_dok_penawaran_hari' => $request->pemasukan_dok_penawaran_hari,
-
 
             'evaluasi_dok_penawaran_nomor' => $request->nppv5,
             'evaluasi_dok_penawaran_jumlah' => $request->evaluasi_dok_penawaran_jumlah,
             'evaluasi_dok_penawaran_tgl' => $request->evaluasi_dok_penawaran_tgl,
             'evaluasi_dok_penawaran_hari' => $request->evaluasi_dok_penawaran_hari,
-
-
 
             'ba_hasil_klarifikasi_dan_nego_penawaran_nomor' => $request->nppv6,
             'ba_hasil_klarifikasi_dan_nego_penawaran_jumlah' => $request->ba_hasil_klarifikasi_dan_nego_penawaran_jumlah,
@@ -156,8 +151,10 @@ class UpdateControllerSpbj extends Controller
             'sumber_dana' => $request->sumber_dana,
             'masa_garansi' => $request->masa_garansi,
             'syarat_bidang' => $request->syarat_bidang,
-            'vfmc' => $request->vfmc,
-            'vfmc2' => $request->vfmc2,
+//            'vfmc' => $request->vfmc,
+//            'vfmc2' => $request->vfmc2,
+            'jabatan_direksi' => $request->jabatan_direksi,
+            'alamat_penyerahan' => $request->alamat_penyerahan,
             'pengguna' => $request->pengguna,
             'nip' => $request->nip,
             'pejabat_pelaksana' => $request->pejabat_pelaksana,
@@ -188,8 +185,11 @@ class UpdateControllerSpbj extends Controller
         );
 
 
-        if (Pengadaan::whereId($request->id)->update($form_data) && PengadaanDetailSpbj::where('id_pengadaan',$request->id)->update($form_data_hari)) {
-            return response()->json(['success' => 'Data Added successfully.']);
+        if (Pengadaan::whereId($request->id)->update($form_data)) {
+            if(PengadaanDetailSpbj::where('id_pengadaan',$request->id)->update($form_data_hari)){
+                return response()->json(['success' => 'Data Added successfully.']);
+            }
+
         } else {
             return response()->json(['errors' => 'Gagal']);
         }
