@@ -68,33 +68,53 @@ class PerusahaanController extends Controller
                 $image->move(public_path().'/dpt/', $name);  // your folder path
                 $data[] = $name;
             }
+
+            $form_data = array(
+                'foto' => json_encode($data),
+                'nama' => $request->nama,
+                'pimpinan' => $request->pimpinan,
+                'notaris' => $request->notaris,
+                'alamat' => $request->alamat,
+                'bank' => $request->bank,
+                'kantor_cabang' => $request->kantor_cabang,
+                'rekening' => $request->rekening,
+                'npwp' => $request->npwp,
+                'telpon' => $request->telpon,
+                'faksimili' => $request->faksimili,
+                'sebutan_jabatan' => $request->sebutan_jabatan,
+                'bentuk_perusahaan' => $request->bentuk_dpt,
+            );
+
+            if (Perusahaan::create($form_data)) {
+                return response()->json(['success' => 'Data Added successfully.']);
+            } else {
+                return response()->json(['success' => $request->nama]);
+            }
+        }else{
+            $form_data = array(
+              
+                'nama' => $request->nama,
+                'pimpinan' => $request->pimpinan,
+                'notaris' => $request->notaris,
+                'alamat' => $request->alamat,
+                'bank' => $request->bank,
+                'kantor_cabang' => $request->kantor_cabang,
+                'rekening' => $request->rekening,
+                'npwp' => $request->npwp,
+                'telpon' => $request->telpon,
+                'faksimili' => $request->faksimili,
+                'sebutan_jabatan' => $request->sebutan_jabatan,
+                'bentuk_perusahaan' => $request->bentuk_dpt,
+            );
+
+            if (Perusahaan::create($form_data)) {
+                return response()->json(['success' => 'Data Added successfully.']);
+            } else {
+                return response()->json(['success' => $request->nama]);
+            }
+    
+    
         }
-
-
-        $form_data = array(
-            'foto' => json_encode($data),
-            'nama' => $request->nama,
-            'pimpinan' => $request->pimpinan,
-            'notaris' => $request->notaris,
-            'alamat' => $request->alamat,
-            'bank' => $request->bank,
-            'kantor_cabang' => $request->kantor_cabang,
-            'rekening' => $request->rekening,
-            'npwp' => $request->npwp,
-            'telpon' => $request->telpon,
-            'faksimili' => $request->faksimili,
-            'sebutan_jabatan' => $request->sebutan_jabatan,
-            'bentuk_perusahaan' => $request->bentuk_dpt,
-        );
-
-
-        if (Perusahaan::create($form_data)) {
-            return response()->json(['success' => 'Data Added successfully.']);
-        } else {
-            return response()->json(['success' => $request->nama]);
-        }
-
-
     }
 
     public function edit($id)

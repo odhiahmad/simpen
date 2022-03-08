@@ -580,6 +580,7 @@ class JobCardController extends Controller
             'sumber_dana' => $request->sumber_dana,
             'masa_garansi' => $request->masa_garansi,
             'syarat_bidang' => $request->syarat_bidang,
+            'no_perjanjian' => $request->no_perjanjian,
 //            'vfmc' => $request->vfmc,
 //            'vfmc2' => $request->vfmc2,
             'jabatan_direksi' => $request->jabatan_direksi,
