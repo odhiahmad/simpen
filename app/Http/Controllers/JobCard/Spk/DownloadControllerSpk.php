@@ -170,7 +170,7 @@ class DownloadControllerSpk extends Controller
         $array = array(
             '[nomor]' => $dataDetail->undangan_pengadaan_langsung_nomor,
             '[tanggal]'=>$gabungan,
-            '[alamat_pt]' => $data->alamat_penyerahan,
+            '[Alamat_Pt]' => $data['getperusahaan']['alamat'],
             '[Perusahaan]' => $data['getperusahaan']['nama'],
             '[Perusahaan1]' => $data['getperusahaan']['nama'],
             '[Judul]' => $data->judul,
@@ -286,11 +286,14 @@ class DownloadControllerSpk extends Controller
         $dataDetail = PengadaanDetailSpk::where('id_pengadaan',$id)->first();
 
         $tanggalIndo = new TanggalIndo();
+        $terbilangIndo = new TerbilangIndo();
 
-        $tanggal=$tanggalIndo->tgl_aja($dataDetail->pemasukan_dok_penawaran_tgl_dari);
-        $bulan=$tanggalIndo->bln_aja($dataDetail->pemasukan_dok_penawaran_tgl_dari);
-        $tahun=$tanggalIndo->thn_aja($dataDetail->pemasukan_dok_penawaran_tgl_dari);
+        $tanggal=$tanggalIndo->tgl_aja($dataDetail->evaluasi_dokumen_tgl_sd);
+        $bulan=$tanggalIndo->bln_aja($dataDetail->evaluasi_dokumen_tgl_sd);
+        $tahun=$tanggalIndo->thn_aja($dataDetail->evaluasi_dokumen_tgl_sd);
         $gabungan = $tanggal.' '.$bulan.' '.$tahun;
+
+        
 
         $word = new WordTemplate();
         $file = public_path('doc/spk/daftar_hadir_eva_dok.rtf');
@@ -379,6 +382,7 @@ class DownloadControllerSpk extends Controller
         $dataDetail = PengadaanDetailSpk::where('id_pengadaan',$id)->first();
 
         $tanggalIndo = new TanggalIndo();
+        $terbilangIndo = new TerbilangIndo();
 
         $tanggal=$tanggalIndo->tgl_aja($dataDetail->ba_hasil_klarifikasi_tgl);
         $bulan=$tanggalIndo->bln_aja($dataDetail->ba_hasil_klarifikasi_tgl);
@@ -401,8 +405,10 @@ class DownloadControllerSpk extends Controller
             '[Rks]' => $dataDetail->rks_nomor,
             '[Tanggal_Rks]' => $gabungan1,
             '[Hari]' => $dataDetail->ba_hasil_klarifikasi_hari,
-            '[Hps]' => $data->harga_penawaran,
+            '[Hps]' =>  $data->harga_penawaran,
             '[Hps_Pajak]' => $data->harga_kontrak,
+            '[Hps_Terbilang]' =>  $terbilangIndo->kata($data->harga_penawaran),
+            '[Hps_Pajak_Terbilang]' =>  $terbilangIndo->kata($data->harga_kontrak),
             '[Waktu_Penyelesaian]' => $data->jangka_waktu,
             '[Tanggal_Penuh]' => $gabungan,
             '[Tanggal]' => $gabungan,
@@ -410,6 +416,7 @@ class DownloadControllerSpk extends Controller
             '[Tahun]' => $tanggalIndo->terbilang($tahun),
             '[Pejabat_Pelaksana]' => $data->pejabat_pelaksana,
             '[Pic_Pelaksana]' => $data->pic_pelaksana,
+            '[Sebutan_Jabatan]' => $data['getperusahaan']['sebutan_jabatan'],
             '[Manager]' => $data->pengguna,
             '[Direktur]' => $data['getperusahaan']['pimpinan'],
             '[Nama_Perusahaan]' => $data['getperusahaan']['nama'],
@@ -428,10 +435,11 @@ class DownloadControllerSpk extends Controller
         $dataDetail = PengadaanDetailSpk::where('id_pengadaan',$id)->first();
 
         $tanggalIndo = new TanggalIndo();
+        $terbilangIndo = new TerbilangIndo();
 
-        $tanggal=$tanggalIndo->tgl_aja($dataDetail->ba_hasil_pengadaan_tgl);
-        $bulan=$tanggalIndo->bln_aja($dataDetail->ba_hasil_pengadaan_tgl);
-        $tahun=$tanggalIndo->thn_aja($dataDetail->ba_hasil_pengadaan_tgl);
+        $tanggal=$tanggalIndo->tgl_aja($dataDetail->pemasukan_dok_penawaran_tgl_sd);
+        $bulan=$tanggalIndo->bln_aja($dataDetail->pemasukan_dok_penawaran_tgl_sd);
+        $tahun=$tanggalIndo->thn_aja($dataDetail->pemasukan_dok_penawaran_tgl_sd);
         $gabungan = $tanggal.' '.$bulan.' '.$tahun;
 
         $tanggal1=$tanggalIndo->tgl_aja($dataDetail->rks_tgl);
@@ -451,6 +459,8 @@ class DownloadControllerSpk extends Controller
             '[Hari]' => $dataDetail->ba_hasil_pengadaan_hari,
             '[Hps]' => $data->harga_penawaran,
             '[Hps_Pajak]' => $data->harga_kontrak,
+            '[Hps_Terbilang]' => $terbilangIndo->kata($data->harga_penawaran),
+            '[Hps_Pajak_Terbilang]' => $terbilangIndo->kata($data->harga_kontrak),
             '[Waktu_Penyelesaian]' => $data->jangka_waktu,
             '[Tanggal_Penuh]' => $gabungan,
             '[Tanggal]' => $tanggalIndo->terbilang($tanggal),
@@ -538,12 +548,13 @@ class DownloadControllerSpk extends Controller
             '[Hari]' => $dataDetail->nd_usulan_tetap_pemenang_hari,
             '[Nd_Nomor]' => $dataDetail->nd_usulan_tetap_pemenang_nomor,
             '[Nd_Nomor_Penetapan]' => $dataDetail->nd_penetapan_pemenang_nomor,
-            '[Ba_Hasil_Pengadaan_Nomor]' => $dataDetail->ba_hasil_pengadaan_nomor,
+            '[banomor]' => $dataDetail->ba_hasil_pengadaan_nomor,
             '[Ba_Tanggal]' => $gabungan2,
             '[Hps]' => $data->harga_penawaran,
             '[Pajak_Hps]' => $data->harga_kontrak,
             '[Waktu_Pelaksanaan]' => $data->jangka_waktu,
             '[Tanggal_Penuh]' => $gabungan,
+            '[Tanggalnd]' => $tanggalIndo->terbilang($tanggal3),
             '[Tanggal]' => $tanggalIndo->terbilang($tanggal),
             '[Bulan]' => $bulan,
             '[Terbilang]' => $terbilangIndo->kata($data->harga_kontrak),
@@ -613,7 +624,13 @@ class DownloadControllerSpk extends Controller
 
 
         $word = new WordTemplate();
-        $file = public_path('doc/spk/spk.rtf');
+        $file = '';
+
+        if($data->id_mp2 == 5){
+            $file = public_path('doc/spk/spk_konstruksi.rtf');
+        }else{
+            $file = public_path('doc/spk/spk.rtf');
+        }
 
         $array = array(
             '[spk_nomor]' => $dataDetail->spk_nomor,
@@ -656,6 +673,7 @@ class DownloadControllerSpk extends Controller
             '[Masa_Garansi]'=>$data->masa_garansi,
             '[Pengguna]'=>$data->pengguna,
             '[Bentuk_Perusahaan]'=> $data['getperusahaan']['bentuk_perusahaan'],
+            '[Jenis_Perjanjian]' => $data->jenis_perjanjian,
                 );
 
         $nama_file = 'spk.doc';

@@ -3,6 +3,45 @@
 </div>
 <div class="form-group m-form__group row">
     <label class="col-lg-2 col-form-label">
+        Dokumen RKS:
+    </label>
+    <div class="col-lg-4">
+        <input value="{{$dataPengadaanDetail->rks_nomor}}" type="text" id="nppv0" name="nppv0"
+               class="form-control m-input">
+        <span class="m-form__help"></span>
+    </div>
+    <div class="col-lg-1">
+        <input type="text" class="form-control m-input rks_jumlah"
+               name="rks_jumlah"
+               value="{{$dataPengadaanDetail->rks_jumlah}}"
+               id="rks_jumlah" placeholder="Jumlah">
+        <span class="m-form__help "></span>
+    </div>
+    <div class="col-lg-2">
+        <input
+            name="rks_tgl"
+            id="rks_tgl"
+            value="{{$dataPengadaanDetail->rks_tgl}}"
+            type='text' class="form-control" readonly placeholder="Tanggal"/>
+    </div>
+    <div class="col-lg-1">
+        <input name="rks_hari"
+               id="rks_hari"
+               readonly
+               value="{{$dataPengadaanDetail->rks_hari}}"
+               type="text" class="form-control m-input" placeholder="Hari">
+        <span class="m-form__help"></span>
+    </div>
+    <div class="col-lg-2">
+        <a href="{!!url('user/jobcard/pj/download-rks/' . $dataPengadaan->id )!!}"
+           class="btn btn-brand btn-sm">
+            Download
+        </a>
+    </div>
+</div>
+
+<div class="form-group m-form__group row">
+    <label class="col-lg-2 col-form-label">
         Survei Harga Pasar:
     </label>
     <div class="col-lg-4">
@@ -128,46 +167,6 @@
     <div class="col-lg-2">
         @if($dataPengadaanDetail->pengumuman_tgl != null)
             <a href="{!!url('user/jobcard/pj/downloadPengumuman/' . $dataPengadaan->id )!!}"
-               class="btn btn-brand btn-sm">
-                Download
-            </a>
-        @endif
-    </div>
-</div>
-<div class="form-group m-form__group row">
-    <label class="col-lg-2 col-form-label">
-        Undangan aanwijzing Peserta :
-    </label>
-    <div class="col-lg-4">
-        <input type="text" value="{{$dataPengadaanDetail->undangan_aanwijzing_peserta_nomor}}" id="nppv4"
-               name="nppv4" class="form-control m-input">
-        <span class="m-form__help"></span>
-    </div>
-    <div class="col-lg-1">
-        <input type="text" value="{{$dataPengadaanDetail->undangan_aanwijzing_peserta_jumlah}}"
-               class="form-control m-input undangan_aanwijzing_peserta_jumlah"
-               name="undangan_aanwijzing_peserta_jumlah"
-               id="undangan_aanwijzing_peserta_jumlah" placeholder="Jumlah">
-        <span class="m-form__help "></span>
-    </div>
-    <div class="col-lg-2">
-        <input
-            value="{{$dataPengadaanDetail->undangan_aanwijzing_peserta_tgl}}"
-            name="undangan_aanwijzing_peserta_tgl"
-            id="undangan_aanwijzing_peserta_tgl"
-            type="text" class="form-control" readonly placeholder="Tanggal"/>
-    </div>
-    <div class="col-lg-1">
-        <input value="{{$dataPengadaanDetail->undangan_aanwijzing_peserta_hari}}"
-               name="undangan_aanwijzing_peserta_hari"
-               id="undangan_aanwijzing_peserta_hari"
-               readonly
-               type="text" class="form-control m-input" placeholder="Hari">
-        <span class="m-form__help"></span>
-    </div>
-    <div class="col-lg-2">
-        @if($dataPengadaanDetail->undangan_aanwijzing_peserta_tgl != null)
-            <a href="{!!url('user/jobcard/pj/download-asman/' . $dataPengadaan->id )!!}"
                class="btn btn-brand btn-sm">
                 Download
             </a>
@@ -1230,80 +1229,44 @@
 
 </div>
 
-{{--<div class="form-group m-form__group row">--}}
-{{--    <label class="col-lg-2 col-form-label">--}}
-{{--        Pj :--}}
-{{--    </label>--}}
-{{--    <div class="col-lg-4">--}}
-{{--        <input type="text" value="{{$dataPengadaanDetail->pj_nomor}}" id="nppv26"--}}
-{{--               name="nppv26" class="form-control m-input">--}}
-{{--        <span class="m-form__help"></span>--}}
-{{--    </div>--}}
-{{--    <div class="col-lg-1">--}}
-{{--        <input type="text" value="{{$dataPengadaanDetail->pj_jumlah}}"--}}
-{{--               class="form-control m-input pj_jumlah"--}}
-{{--               name="pj_jumlah"--}}
-{{--               id="pj_jumlah" placeholder="Jumlah">--}}
-{{--        <span class="m-form__help "></span>--}}
-{{--    </div>--}}
-{{--    <div class="col-lg-2">--}}
-{{--        <input--}}
-{{--            value="{{$dataPengadaanDetail->pj_tgl}}"--}}
-{{--            name="pj_tgl"--}}
-{{--            id="pj_tgl"--}}
-{{--            type="text" class="form-control" readonly placeholder="Tanggal"/>--}}
-{{--    </div>--}}
-{{--    <div class="col-lg-1">--}}
-{{--        <input value="{{$dataPengadaanDetail->pj_hari}}" name="pj_hari"--}}
-{{--               id="pj_hari"--}}
-{{--               readonly--}}
-{{--               type="text" class="form-control m-input" placeholder="Hari">--}}
-{{--        <span class="m-form__help"></span>--}}
-{{--    </div>--}}
-{{--    <div class="col-lg-2">--}}
-{{--        <a href="{!!url('user/jobcard/download-hps/' . $dataPengadaan->id )!!}"--}}
-{{--           class="btn btn-brand btn-sm">--}}
-{{--            Download--}}
-{{--        </a>--}}
-{{--    </div>--}}
-{{--</div>--}}
-
-{{--<div class="form-group m-form__group row">--}}
-{{--    <label class="col-lg-2 col-form-label">--}}
-{{--        Bastl :--}}
-{{--    </label>--}}
-{{--    <div class="col-lg-4">--}}
-{{--        <input type="text" value="{{$dataPengadaanDetail->bastl_nomor}}" id="nppv27"--}}
-{{--               name="nppv27" class="form-control m-input">--}}
-{{--        <span class="m-form__help"></span>--}}
-{{--    </div>--}}
-{{--    <div class="col-lg-1">--}}
-{{--        <input type="text" value="{{$dataPengadaanDetail->bastl_jumlah}}"--}}
-{{--               class="form-control m-input bastl_jumlah"--}}
-{{--               name="bastl_jumlah"--}}
-{{--               id="bastl_jumlah" placeholder="Jumlah">--}}
-{{--        <span class="m-form__help "></span>--}}
-{{--    </div>--}}
-{{--    <div class="col-lg-2">--}}
-{{--        <input--}}
-{{--            value="{{$dataPengadaanDetail->bastl_tgl}}"--}}
-{{--            name="bastl_tgl"--}}
-{{--            id="bastl_tgl"--}}
-{{--            type="text" class="form-control" readonly placeholder="Tanggal"/>--}}
-{{--    </div>--}}
-{{--    <div class="col-lg-1">--}}
-{{--        <input value="{{$dataPengadaanDetail->bastl_hari}}" name="bastl_hari"--}}
-{{--               id="bastl_hari"--}}
-{{--               readonly--}}
-{{--               type="text" class="form-control m-input" placeholder="Hari">--}}
-{{--        <span class="m-form__help"></span>--}}
-{{--    </div>--}}
-{{--    <div class="col-lg-2">--}}
-{{--        <a href="{!!url('user/jobcard/download-hps/' . $dataPengadaan->id )!!}"--}}
-{{--           class="btn btn-brand btn-sm">--}}
-{{--            Download--}}
-{{--        </a>--}}
-{{--    </div>--}}
-{{--</div>--}}
-
+<div class="form-group m-form__group row">
+    <label class="col-lg-2 col-form-label">
+        SPK:
+    </label>
+    <div class="col-lg-4">
+        <input type="text" value="{{$dataPengadaanDetail->spk_nomor}}" id="nppv26" name="nppv26"
+               class="form-control m-input">
+        <span class="m-form__help"></span>
+    </div>
+    <div class="col-lg-1">
+        <input type="text" class="form-control m-input"
+               name="spk_jumlah"
+               value="{{$dataPengadaanDetail->spk_jumlah}}"
+               id="spk_jumlah" placeholder="Jumlah">
+        <span class="m-form__help "></span>
+    </div>
+    <div class="col-lg-2">
+        <input
+            value="{{$dataPengadaanDetail->spk_tgl}}"
+            name="spk_tgl"
+            id="spk_tgl"
+            type='text' class="form-control" readonly placeholder="Tanggal"/>
+    </div>
+    <div class="col-lg-1">
+        <input name="spk_hari"
+               id="spk_hari"
+               readonly
+               value="{{$dataPengadaanDetail->spk_hari}}"
+               type="text" class="form-control m-input" placeholder="Hari">
+        <span class="m-form__help"></span>
+    </div>
+    @if($dataPengadaanDetail->spk_tgl != null)
+        <div class="col-lg-2">
+            <a href="{!!url('user/jobcard/pj/download-spk/' . $dataPengadaan->id )!!}"
+               class="btn btn-brand btn-sm">
+                Download
+            </a>
+        </div>
+    @endif
+</div>
 @include('pages.user.job-card.pj.updatePengadaanTeka2.jsUpdatePilihanHari')

@@ -450,7 +450,7 @@ class JobCardPjController extends Controller
         $dataMetodePengadaan = DMetodePengadaan::where('id_induk', '0')->get();
         $dataPengawas = DPengawas::all();
         $dataPerjanjianKontrak = DPerjanjianKontrak::all();
-        $dataPicPelaksana = DPicPelaksana::where('metode', 'pj')->get();
+        $dataPicPelaksana = DPicPelaksana::where('metode', 'spk')->get();
         $dataSumberDana = DSumberDana::all();
         $dataSyaratBidangUsaha = DSyaratBidangUsaha::all();
         $dataTempatPenyerahan = DTempatPenyerahan::where('metode', 'pj')->get();

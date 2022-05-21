@@ -86,7 +86,7 @@
                                 <span class="m-form__help"></span></div>
                             <div class="col-lg-6">
                                 <label>
-                                    No PJ:
+                                    No PRK:
                                 </label>
                                 <input type="text" class="form-control m-input" id="no_prk" name="no_prk"
                                        placeholder="Masukan Nomor PRK">

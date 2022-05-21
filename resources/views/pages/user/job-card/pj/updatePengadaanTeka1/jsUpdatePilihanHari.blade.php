@@ -8,10 +8,10 @@
         $("#refreshTanggal").click(function () {
             var hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu",];
 
+            var tglJumlah0 = $('#rks_jumlah')
             var tglJumlah1 = $('#survey_harga_pasar_jumlah')
             var tglJumlah2 = $('#hps_jumlah');
             var tglJumlah3 = $('#pengumuman_jumlah');
-            var tglJumlah4 = $('#undangan_aanwijzing_peserta_jumlah');
             var tglJumlah5 = $('#undangan_aanwijzing_direksi_pekerjaan_jumlah');
             var tglJumlah6 = $('#aanwijzing_jumlah');
             var tglJumlah7 = $('#addendum_rks_jumlah');
@@ -30,14 +30,13 @@
             var tglJumlah20 = $('#skkp_jumlah');
             var tglJumlah21 = $('#undangan_cda_jumlah');
             var tglJumlah22 = $('#cda_jumlah');
-            var tglJumlah23 = $('#pj_jumlah');
-            var tglJumlah24 = $('#bastl_jumlah');
+            var tglJumlah23 = $('#spk_jumlah');
             var tglJumlah25 = $('#pemasukan_dok_penawaran_jumlah_dari');
 
+            var jp0 = parseInt(tglJumlah0.val());
             var jp1 = parseInt(tglJumlah1.val());
             var jp2 = parseInt(tglJumlah2.val());
             var jp3 = parseInt(tglJumlah3.val());
-            var jp4 = parseInt(tglJumlah4.val());
             var jp5 = parseInt(tglJumlah5.val());
             var jp6 = parseInt(tglJumlah6.val());
             var jp7 = parseInt(tglJumlah7.val());
@@ -57,7 +56,6 @@
             var jp21 = parseInt(tglJumlah21.val());
             var jp22 = parseInt(tglJumlah22.val());
             var jp23 = parseInt(tglJumlah23.val());
-            var jp24 = parseInt(tglJumlah24.val());
             var jp25 = parseInt(tglJumlah25.val());
 
 
@@ -65,38 +63,35 @@
             var getTanggal = tanggalDiterimaP.val();
             var gTd = new Date(getTanggal);
 
-            var tambahTgl1 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1));
-            var tambahTgl2 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2));
-            var tambahTgl3 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3));
-            var tambahTgl4 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3 + jp4));
-            var tambahTgl5 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3 + jp4 + jp5));
-            var tambahTgl6 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3 + jp4 + jp5 + jp6));
-            var tambahTgl7 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7));
-            var tambahTgl25 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp25));
-            var tambahTgl8 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp8 + jp25));
-            var tambahTgl9 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp8 + jp9 + jp25));
-            var tambahTgl10 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp25));
-            var tambahTgl11 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp25));
-            var tambahTgl12 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp25));
-            var tambahTgl13 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp25));
-            var tambahTgl14 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp25));
-            var tambahTgl15 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp15 + jp25));
-            var tambahTgl16 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp15 + jp16 + jp25));
-            var tambahTgl17 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp15 + jp16 + jp17 + jp25));
-            var tambahTgl18 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp15 + jp16 + jp17 + jp18 + jp25));
-            var tambahTgl19 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp15 + jp16 + jp17 + jp18 + jp19 + jp25));
-            var tambahTgl20 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp15 + jp16 + jp17 + jp18 + jp19 + jp20 + jp25));
-            var tambahTgl21 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp15 + jp16 + jp17 + jp18 + jp19 + jp20 + jp21 + jp25));
-            var tambahTgl22 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp15 + jp16 + jp17 + jp18 + jp19 + jp20 + jp21 + jp22 + jp25));
-            var tambahTgl23 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp15 + jp16 + jp17 + jp18 + jp19 + jp20 + jp21 + jp22 + jp23 + jp25));
-            var tambahTgl24 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp15 + jp16 + jp17 + jp18 + jp19 + jp20 + jp21 + jp22 + jp23 + jp24 + jp25));
-
+            var tambahTgl0 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0));
+            var tambahTgl1 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1));
+            var tambahTgl2 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2));
+            var tambahTgl3 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3));
+            var tambahTgl5 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5));
+            var tambahTgl6 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5 + jp6));
+            var tambahTgl7 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5 + jp6 + jp7));
+            var tambahTgl25 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5 + jp6 + jp7 + jp25));
+            var tambahTgl8 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5 + jp6 + jp7 + jp8 + jp25));
+            var tambahTgl9 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5 + jp6 + jp7 + jp8 + jp9 + jp25));
+            var tambahTgl10 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp25));
+            var tambahTgl11 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp25));
+            var tambahTgl12 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp25));
+            var tambahTgl13 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp25));
+            var tambahTgl14 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp25));
+            var tambahTgl15 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp15 + jp25));
+            var tambahTgl16 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp15 + jp16 + jp25));
+            var tambahTgl17 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp15 + jp16 + jp17 + jp25));
+            var tambahTgl18 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp15 + jp16 + jp17 + jp18 + jp25));
+            var tambahTgl19 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp15 + jp16 + jp17 + jp18 + jp19 + jp25));
+            var tambahTgl20 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp15 + jp16 + jp17 + jp18 + jp19 + jp20 + jp25));
+            var tambahTgl21 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp15 + jp16 + jp17 + jp18 + jp19 + jp20 + jp21 + jp25));
+            var tambahTgl22 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp15 + jp16 + jp17 + jp18 + jp19 + jp20 + jp21 + jp22 + jp25));
+            var tambahTgl23 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp0 + jp1 + jp2 + jp3 +  jp5 + jp6 + jp7 + jp8 + jp9 + jp10 + jp11 + jp12 + jp13 + jp14 + jp15 + jp16 + jp17 + jp18 + jp19 + jp20 + jp21 + jp22 + jp23 + jp25));
+       
+            $('#rks_tgl').datepicker('setDate', tambahTgl0);
             $('#survey_harga_pasar_tgl').datepicker('setDate', tambahTgl1);
-            $('#survey_harga_pasar_hari').val(hari[tambahTgl1.getDay()])
-
             $('#hps_tgl').datepicker('setDate', tambahTgl2);
             $('#pengumuman_tgl').datepicker('setDate', tambahTgl3);
-            $('#undangan_aanwijzing_peserta_tgl').datepicker('setDate', tambahTgl4);
             $('#undangan_aanwijzing_direksi_pekerjaan_tgl').datepicker('setDate', tambahTgl5);
             $('#aanwijzing_tgl').datepicker('setDate', tambahTgl6);
             $('#addendum_rks_tgl').datepicker('setDate', tambahTgl7);
@@ -115,13 +110,14 @@
             $('#skkp_tgl').datepicker('setDate', tambahTgl20);
             $('#undangan_cda_tgl').datepicker('setDate', tambahTgl21);
             $('#cda_tgl').datepicker('setDate', tambahTgl22);
-            $('#pj_tgl').datepicker('setDate', tambahTgl23);
-            $('#bastl_tgl').datepicker('setDate', tambahTgl24);
+            $('#spk_tgl').datepicker('setDate', tambahTgl23);
             $('#pemasukan_dok_penawaran_tgl_dari').datepicker('setDate', tambahTgl25);
 
+
+            $('#rks_hari').val(hari[tambahTgl0.getDay()])
+            $('#survey_harga_pasar_hari').val(hari[tambahTgl1.getDay()])
             $('#hps_hari').val(hari[tambahTgl2.getDay()]);
             $('#pengumuman_hari').val(hari[tambahTgl3.getDay()]);
-            $('#undangan_aanwijzing_peserta_hari').val(hari[tambahTgl4.getDay()]);
             $('#undangan_aanwijzing_direksi_pekerjaan_hari').val(hari[tambahTgl5.getDay()]);
             $('#aanwijzing_hari').val(hari[tambahTgl6.getDay()]);
             $('#addendum_rks_hari').val(hari[tambahTgl7.getDay()]);
@@ -140,13 +136,12 @@
             $('#skkp_hari').val(hari[tambahTgl20.getDay()]);
             $('#undangan_cda_hari').val(hari[tambahTgl21.getDay()]);
             $('#cda_hari').val(hari[tambahTgl22.getDay()]);
-            $('#pj_hari').val(hari[tambahTgl23.getDay()]);
-            $('#bastl_hari').val(hari[tambahTgl24.getDay()]);
-
+            $('#spk_hari').val(hari[tambahTgl23.getDay()]);
             $('#pemasukan_dok_penawaran_hari_dari').val(hari[tambahTgl25.getDay()]);
         });
 
 
+        var $nppv0 = $('#nppv0')
         var $nppv1 = $('#nppv1')
         var $nppv2 = $('#nppv2')
         var $nppv3 = $('#nppv3')
@@ -178,6 +173,7 @@
                     total = total * parseInt(this.value, 10);
             });
             if ($('#fungsi_pembangkit').val() === 'Pembangkit') {
+                $nppv0.val('0' + total + '.RKS/DAN.01.01/210200/' + $('#tahun').val());
                 $nppv1.val('0' + total + '.BASVY-PL/DAN.02.01/210200/' + $('#tahun').val());
                 $nppv2.val('0' + total + '.HPS-PL/DAN.02.01/210200/' + $('#tahun').val());
                 $nppv3.val('0' + total + '.PENGLLNG/DAN.02.01/210200/' + $('#tahun').val());
@@ -199,10 +195,12 @@
                 $nppv20.val('0' + total + '.K/DAN.01.01/210200/' + $('#tahun').val());
                 $nppv21.val('0' + total + '.UNDCDA/DAN.01.01/210200/' + $('#tahun').val());
                 $nppv22.val('0' + total + '.BACDA/DAN.01.01/210200/' + $('#tahun').val());
-                $nppv23.val('0' + total + '.PJ/DAN.01.01/210200/' + $('#tahun').val());
+                $nppv23.val('0' + total + '.SPK/DAN.02.01/210200/' + $('#tahun').val());
                 $nppv24.val('0' + total + '.BASTL/DAN.01.01/210200/' + $('#tahun').val());
+                
 
             } else if ($('#fungsi_pembangkit').val() === 'Sarana') {
+                $nppv0.val('0' + total + '.RKS/DAN.01.06/210200/' + $('#tahun').val());
                 $nppv1.val('0' + total + '.BASVY-PL/DAN.02.07/210200/' + $('#tahun').val());
                 $nppv2.val('0' + total + '.HPS-PL/DAN.02.07/210200/' + $('#tahun').val());
                 $nppv3.val('0' + total + '.PENGLLNG/DAN.07.01/210200/' + $('#tahun').val());
@@ -224,7 +222,7 @@
                 $nppv20.val('0' + total + '.K/DAN.02.07/210200/' + $('#tahun').val());
                 $nppv21.val('0' + total + '.UNDCDA/DAN.02.07/210200/' + $('#tahun').val());
                 $nppv22.val('0' + total + '.BACDA/DAN.02.07/210200/' + $('#tahun').val());
-                $nppv23.val('0' + total + '.PJ/DAN.02.07/210200/' + $('#tahun').val());
+                $nppv23.val('0' + total + '.SPK/DAN.02.07/210200/' + $('#tahun').val());
                 $nppv24.val('0' + total + '.BASTL/DAN.02.07/210200/' + $('#tahun').val());
             }
         });

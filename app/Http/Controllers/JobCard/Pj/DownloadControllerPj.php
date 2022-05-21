@@ -1982,4 +1982,33 @@ class DownloadControllerPj extends Controller
     }
 
 
+    public function downloadSpk($id)
+    {
+        $data = Pengadaan::where('id', $id)->first();
+        $dataDetail = PengadaanDetailPj::where('id_pengadaan', $id)->first();
+
+        $tanggalIndo = new TanggalIndo();
+
+        $tanggal = $tanggalIndo->tgl_aja($dataDetail->spk_tgl);
+        $bulan = $tanggalIndo->bln_aja($dataDetail->spk_tgl);
+        $tahun = $tanggalIndo->thn_aja($dataDetail->spk_tgl);
+        $gabungan = $tanggal . ' ' . $bulan . ' ' . $tahun;
+
+        $word = new WordTemplate();
+        $file = public_path('doc/pj/spk.rtf');
+
+        $array = array(
+            '[hari]' => $dataDetail->spk_hari,
+            '[tanggal]' => $gabungan,
+            '[pejabat_pelaksana]' => $data->pejabat_pelaksana,
+            '[pic_pelaksana]' => $data->pic_pelaksana,
+        );
+
+        $nama_file = 'spk.doc';
+
+        return $word->export($file, $array, $nama_file);
+    }
+
+   
+
 }

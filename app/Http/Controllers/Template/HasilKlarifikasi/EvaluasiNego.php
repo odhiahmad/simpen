@@ -86,6 +86,16 @@ class EvaluasiNego
         $sheet->setCellValue('H14', 'Total Harga (Rp)')->getStyle('H14')->getAlignment()->applyFromArray($arrayStyle);
 
 
+        $sheet->mergeCells('B31:D31')->setCellValue('B31', 'Disahkan oleh,')->getStyle('B31')->getAlignment()->applyFromArray($arrayStyle);
+        $sheet->mergeCells('B32:D32')->setCellValue('B32', 'Manager')->getStyle('B32')->getAlignment()->applyFromArray($arrayStyle);
+        $sheet->mergeCells('B38:D38')->setCellValue('B38', ''.$data->pengguna)->getStyle('B38')->getAlignment()->applyFromArray($arrayStyle);
+
+        $sheet->mergeCells('F30:I30')->setCellValue('F30', 'Pekanbaru, '.$data->hps_tgl)->getStyle('F30')->getAlignment()->applyFromArray($arrayStyle);
+        $sheet->mergeCells('F31:I31')->setCellValue('F31', 'Dibuat oleh,')->getStyle('F31')->getAlignment()->applyFromArray($arrayStyle);
+        $sheet->mergeCells('F32:I32')->setCellValue('F32', 'Pejabat Pelaksana')->getStyle('F32')->getAlignment()->applyFromArray($arrayStyle);
+        $sheet->mergeCells('F38:I38')->setCellValue('F38', ''.$data->pejabat_pelaksana)->getStyle('F38')->getAlignment()->applyFromArray($arrayStyle);
+
+
         $sheet->getStyle('A12')->getFont()->setName('Arial')->setSize(10);
         $sheet->getStyle('B13')->getFont()->setName('Arial')->setSize(10);
         $sheet->getStyle('E12')->getFont()->setName('Arial')->setSize(10)->setBold(true);

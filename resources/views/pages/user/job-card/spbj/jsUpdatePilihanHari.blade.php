@@ -2,19 +2,16 @@
     function updateTanggal() {
         var hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu",];
 
-        var tglJumlah10 = $('#rks_jumlah');
-        var tglJumlah1 = $('#survey_harga_pasar_jumlah')
-        var tglJumlah2 = $('#hps_jumlah');
-        var tglJumlah3 = $('#undangan_pengadaan_langsung_jumlah');
-        var tglJumlah4 = $('#pemasukan_dok_penawaran_jumlah');
-        var tglJumlah8 = $('#pemasukan_dok_penawaran_jumlah_dari');
-        var tglJumlah5 = $('#evaluasi_dok_penawaran_jumlah');
-      
-        var tglJumlah6 = $('#ba_hasil_klarifikasi_dan_nego_penawaran_jumlah');
-        var tglJumlah7 = $('#spbj_jumlah');
+        var tglJumlah1 = $('#rks_jumlah');
+        var tglJumlah2 = $('#survey_harga_pasar_jumlah')
+        var tglJumlah3 = $('#hps_jumlah');
+        var tglJumlah4 = $('#undangan_pengadaan_langsung_jumlah');
+        var tglJumlah5 = $('#pemasukan_dok_penawaran_jumlah_dari');
+        var tglJumlah6 = $('#pemasukan_dok_penawaran_jumlah');
+        var tglJumlah7 = $('#evaluasi_dok_penawaran_jumlah');
+        var tglJumlah8 = $('#ba_hasil_klarifikasi_dan_nego_penawaran_jumlah');
+        var tglJumlah9 = $('#spbj_jumlah');
        
-
-        var jp10 = parseInt(tglJumlah10.val());
         var jp1 = parseInt(tglJumlah1.val());
         var jp2 = parseInt(tglJumlah2.val());
         var jp3 = parseInt(tglJumlah3.val());
@@ -23,48 +20,44 @@
         var jp6 = parseInt(tglJumlah6.val());
         var jp7 = parseInt(tglJumlah7.val());
         var jp8 = parseInt(tglJumlah8.val());
+        var jp9 = parseInt(tglJumlah9.val());
        
-
-
-
         var tanggalDiterimaP = $('#tanggal_diterima_panitia')
         var getTanggal = tanggalDiterimaP.val();
         var gTd = new Date(getTanggal);
 
-        var tambahTgl10 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp10));
-        var tambahTgl1 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1)+ (jp10));
-        var tambahTgl2 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2)+ (jp10));
-        var tambahTgl3 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3)+ (jp10));
-        var tambahTgl8 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3 + jp8)+ (jp10));
-        var tambahTgl4 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3 + jp4 + jp8)+ (jp10));
-   
-        var tambahTgl5 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3 + jp4 + jp5 + jp8)+ (jp10));
-        var tambahTgl6 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp8)+ (jp10));
-        var tambahTgl7 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp8)+ (jp10));
+        var tambahTgl1 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1));
+        var tambahTgl2 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1+ jp2));
+        var tambahTgl3 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2+ jp3));
+        var tambahTgl4 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3+ jp4));
+        var tambahTgl5 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3 + jp4+ jp5));
+        var tambahTgl6 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3 + jp4 + jp6+ jp7));
+        var tambahTgl7 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3 + jp4 + jp6 + jp7+ jp8));
+        var tambahTgl8 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3 + jp4 + jp5 + jp7 + jp8+ jp9));
+        var tambahTgl9 = new Date(gTd.getFullYear(), gTd.getMonth(), gTd.getDate() + (jp1 + jp2 + jp3 + jp4 + jp5 + jp6 + jp7 + jp8+ jp9));
+
+        console.log(tambahTgl1)
 
 
-        $('#rks_tgl').datepicker('setDate', tambahTgl10);
-        $('#survey_harga_pasar_tgl').datepicker('setDate', tambahTgl1);
-        $('#hps_tgl').datepicker('setDate', tambahTgl2);
-        $('#undangan_pengadaan_langsung_tgl').datepicker('setDate', tambahTgl3);
-        $('#pemasukan_dok_penawaran_tgl').datepicker('setDate', tambahTgl4);
-        $('#evaluasi_dok_penawaran_tgl').datepicker('setDate', tambahTgl5);
-        $('#pemasukan_dok_penawaran_tgl_dari').datepicker('setDate', tambahTgl8);
-       
-        $('#ba_hasil_klarifikasi_dan_nego_penawaran_tgl').datepicker('setDate', tambahTgl6);
-        $('#spbj_tgl').datepicker('setDate', tambahTgl7);
+        $('#rks_tgl').datepicker('setDate', tambahTgl1);
+        $('#survey_harga_pasar_tgl').datepicker('setDate', tambahTgl2);
+        $('#hps_tgl').datepicker('setDate', tambahTgl3);
+        $('#undangan_pengadaan_langsung_tgl').datepicker('setDate', tambahTgl4);
+        $('#pemasukan_dok_penawaran_tgl').datepicker('setDate', tambahTgl5);
+        $('#evaluasi_dok_penawaran_tgl').datepicker('setDate', tambahTgl6);
+        $('#pemasukan_dok_penawaran_tgl_dari').datepicker('setDate', tambahTgl7);
+        $('#ba_hasil_klarifikasi_dan_nego_penawaran_tgl').datepicker('setDate', tambahTgl8);
+        $('#spbj_tgl').datepicker('setDate', tambahTgl9);
 
-
-        $('#rks_hari').val(hari[tambahTgl10.getDay()])
-        $('#survey_harga_pasar_hari').val(hari[tambahTgl1.getDay()])
-        $('#hps_hari').val(hari[tambahTgl2.getDay()]);
-        $('#undangan_pengadaan_langsung_hari').val(hari[tambahTgl3.getDay()]);
-        $('#pemasukan_dok_penawaran_hari_dari').val(hari[tambahTgl8.getDay()]);
-        $('#evaluasi_dok_penawaran_hari_dari').val(hari[tambahTgl9.getDay()]);
-        $('#pemasukan_dok_penawaran_hari').val(hari[tambahTgl4.getDay()]);
-        $('#evaluasi_dok_penawaran_hari').val(hari[tambahTgl5.getDay()]);
-        $('#ba_hasil_klarifikasi_dan_nego_penawaran_hari').val(hari[tambahTgl6.getDay()]);
-        $('#spbj_hari').val(hari[tambahTgl7.getDay()]);
+        $('#rks_hari').val(hari[tambahTgl1.getDay()])
+        $('#survey_harga_pasar_hari').val(hari[tambahTgl2.getDay()])
+        $('#hps_hari').val(hari[tambahTgl3.getDay()]);
+        $('#undangan_pengadaan_langsung_hari').val(hari[tambahTgl4.getDay()]);
+        $('#pemasukan_dok_penawaran_hari_dari').val(hari[tambahTgl5.getDay()]);
+        $('#pemasukan_dok_penawaran_hari').val(hari[tambahTgl6.getDay()]);
+        $('#evaluasi_dok_penawaran_hari').val(hari[tambahTgl7.getDay()]);
+        $('#ba_hasil_klarifikasi_dan_nego_penawaran_hari').val(hari[tambahTgl8.getDay()]);
+        $('#spbj_hari').val(hari[tambahTgl9.getDay()]);
 
 
     }

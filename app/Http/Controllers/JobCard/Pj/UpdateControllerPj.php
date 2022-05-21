@@ -65,6 +65,11 @@ class UpdateControllerPj extends Controller
         }
 
         $form_data_hari = array(
+            'rks_nomor' => $request->nppv0,
+            'rks_jumlah' => $request->rks_jumlah,
+            'rks_tgl' => $request->rks_tgl,
+            'rks_hari' => $request->rks_hari,
+
             'survey_harga_pasar_nomor' => $request->nppv1,
             'survey_harga_pasar_jumlah' => $request->survey_harga_pasar_jumlah,
             'survey_harga_pasar_tgl' => $request->survey_harga_pasar_tgl,
@@ -99,8 +104,6 @@ class UpdateControllerPj extends Controller
             'addendum_rks_jumlah' => $request->addendum_rks_jumlah,
             'addendum_rks_tgl' => $request->addendum_rks_tgl,
             'addendum_rks_hari' => $request->addendum_rks_hari,
-
-            'pemasukan_dok_penawaran_nomor' => $request->nppv8,
 
             'pemasukan_dok_penawaran_jumlah_dari' => $request->pemasukan_dok_penawaran_jumlah_dari,
             'pemasukan_dok_penawaran_tgl_dari' =>$request->pemasukan_dok_penawaran_tgl_dari,
@@ -180,15 +183,12 @@ class UpdateControllerPj extends Controller
             'cda_tgl' => $request->cda_tgl,
             'cda_hari' => $request->cda_hari,
 
-            'pj_nomor' => $request->nppv23,
-            'pj_jumlah' => $request->pj_jumlah,
-            'pj_tgl' => $request->pj_tgl,
-            'pj_hari' => $request->pj_hari,
+           
 
-            'bastl_nomor' => $request->nppv24,
-            'bastl_jumlah' => $request->bastl_jumlah,
-            'bastl_tgl' => $request->bastl_tgl,
-            'bastl_hari' => $request->bastl_hari,
+            'spk_nomor' => $request->nppv23,
+            'spk_jumlah' => $request->spk_jumlah,
+            'spk_tgl' => $request->spk_tgl,
+            'spk_hari' => $request->spk_hari,
 
 
         );
@@ -326,6 +326,11 @@ class UpdateControllerPj extends Controller
         }
 
         $form_data_hari = array(
+            'rks_nomor' => $request->nppv0,
+            'rks_jumlah' => $request->rks_jumlah,
+            'rks_tgl' => $request->rks_tgl,
+            'rks_hari' => $request->rks_hari,
+
             'survey_harga_pasar_nomor' => $request->nppv1,
             'survey_harga_pasar_jumlah' => $request->survey_harga_pasar_jumlah,
             'survey_harga_pasar_tgl' => $request->survey_harga_pasar_tgl,
@@ -456,15 +461,15 @@ class UpdateControllerPj extends Controller
             'cda_tgl' => $request->cda_tgl,
             'cda_hari' => $request->cda_hari,
 
-            'pj_nomor' => $request->nppv26,
-            'pj_jumlah' => $request->pj_jumlah,
-            'pj_tgl' => $request->pj_tgl,
-            'pj_hari' => $request->pj_hari,
+            // 'pj_nomor' => $request->nppv26,
+            // 'pj_jumlah' => $request->pj_jumlah,
+            // 'pj_tgl' => $request->pj_tgl,
+            // 'pj_hari' => $request->pj_hari,
 
-            'bastl_nomor' => $request->nppv27,
-            'bastl_jumlah' => $request->bastl_jumlah,
-            'bastl_tgl' => $request->bastl_tgl,
-            'bastl_hari' => $request->bastl_hari,
+            'spk_nomor' => $request->nppv26,
+            'spk_jumlah' => $request->spk_jumlah,
+            'spk_tgl' => $request->spk_tgl,
+            'spk_hari' => $request->spk_hari,
 
 
         );
@@ -599,6 +604,11 @@ class UpdateControllerPj extends Controller
         }
 
         $form_data_hari = array(
+            'rks_nomor' => $request->nppv0,
+            'rks_jumlah' => $request->rks_jumlah,
+            'rks_tgl' => $request->rks_tgl,
+            'rks_hari' => $request->rks_hari,
+
             'survey_harga_pasar_nomor' => $request->nppv1,
             'survey_harga_pasar_jumlah' => $request->survey_harga_pasar_jumlah,
             'survey_harga_pasar_tgl' => $request->survey_harga_pasar_tgl,
@@ -704,15 +714,11 @@ class UpdateControllerPj extends Controller
             'cda_tgl' => $request->cda_tgl,
             'cda_hari' => $request->cda_hari,
 
-            'pj_nomor' => $request->nppv21,
-            'pj_jumlah' => $request->pj_jumlah,
-            'pj_tgl' => $request->pj_tgl,
-            'pj_hari' => $request->pj_hari,
 
-            'bastl_nomor' => $request->nppv22,
-            'bastl_jumlah' => $request->bastl_jumlah,
-            'bastl_tgl' => $request->bastl_tgl,
-            'bastl_hari' => $request->bastl_hari,
+            'spk_nomor' => $request->nppv21,
+            'spk_jumlah' => $request->spk_jumlah,
+            'spk_tgl' => $request->spk_tgl,
+            'spk_hari' => $request->spk_hari,
 
 
         );
@@ -849,6 +855,11 @@ class UpdateControllerPj extends Controller
         }
 
         $form_data_hari = array(
+            'rks_nomor' => $request->nppv0,
+            'rks_jumlah' => $request->rks_jumlah,
+            'rks_tgl' => $request->rks_tgl,
+            'rks_hari' => $request->rks_hari,
+            
             'survey_harga_pasar_nomor' => $request->nppv1,
             'survey_harga_pasar_jumlah' => $request->survey_harga_pasar_jumlah,
             'survey_harga_pasar_tgl' => $request->survey_harga_pasar_tgl,
@@ -969,15 +980,15 @@ class UpdateControllerPj extends Controller
             'cda_tgl' => $request->cda_tgl,
             'cda_hari' => $request->cda_hari,
 
-            'pj_nomor' => $request->nppv24,
-            'pj_jumlah' => $request->pj_jumlah,
-            'pj_tgl' => $request->pj_tgl,
-            'pj_hari' => $request->pj_hari,
+            // 'pj_nomor' => $request->nppv24,
+            // 'pj_jumlah' => $request->pj_jumlah,
+            // 'pj_tgl' => $request->pj_tgl,
+            // 'pj_hari' => $request->pj_hari,
 
-            'bastl_nomor' => $request->nppv25,
-            'bastl_jumlah' => $request->bastl_jumlah,
-            'bastl_tgl' => $request->bastl_tgl,
-            'bastl_hari' => $request->bastl_hari,
+            'spk_nomor' => $request->nppv23,
+            'spk_jumlah' => $request->spk_jumlah,
+            'spk_tgl' => $request->spk_tgl,
+            'spk_hari' => $request->spk_hari,
 
 
         );

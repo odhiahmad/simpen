@@ -135,7 +135,7 @@
                                        id="judul" name="judul"
                                        placeholder="Masukan Judul">
                                 <span class="m-form__help"></span></div>
-                            <div class="col-lg-6">
+                            <div class="col-ldataPengadaanDetailg-6">
                                 <label>
                                     Tahun:
                                 </label>
@@ -183,14 +183,14 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-lg-6">
+                            <!-- <div class="col-lg-6">
                                 <label>
                                     No Undang PL:
                                 </label>
                                 <input value="{{$dataPengadaan->no_undang_pl}}" type="text"
                                        class="form-control m-input no_undang_pl" id="no_undang_pl" name="no_undang_pl"
                                        placeholder="Masukan No Undang PL">
-                                <span class="m-form__help"></span></div>
+                                <span class="m-form__help"></span></div> -->
                             <div class="col-lg-6">
                                 <label>
                                     Lingkup Pekerjaan:
@@ -455,7 +455,7 @@
                                 <label>
                                     Direksi:
                                 </label>
-                                <input type="text" class="form-control m-input direksi" disabled value="{{$dataPengadaan->direksi}}"
+                                <input type="text" class="form-control m-input direksi" value="{{$dataPengadaan->direksi}}"
                                        id="direksi" name="direksi"
                                        placeholder="Direksi">
                                 <span class="m-form__help"></span>
@@ -488,8 +488,17 @@
                                        placeholder="Masukan Pejabat Pelaksana">
                                 <span class="m-form__help"></span>
                             </div>
-                           
                             <div class="col-lg-6">
+                                <label>
+                                    Pengawas
+                                </label>
+                                <input type="text" class="form-control m-input pengawas" value="{{$dataPengadaan->pengawas}}"
+                                       id="pengawas" name="pengawas"
+                                       placeholder="Pengawas">
+                              
+                                <span class="m-form__help"></span>
+                            </div>
+                            <!-- <div class="col-lg-6">
                                 <label>
                                     Pengawas
                                 </label>
@@ -502,7 +511,7 @@
                                     @endforeach
                                 </select>
                                 <span class="m-form__help"></span>
-                            </div>
+                            </div> -->
                             <div class="col-lg-6">
                                 <label>
                                     Jabatan Pengawas
@@ -516,15 +525,6 @@
                                     @endforeach
                                 </select>
                                 <span class="m-form__help">`</span>
-                            </div>
-                            <div class="col-lg-6">
-                                <label>
-                                    Ketua Tim:
-                                </label>
-                                <input type="text" class="form-control m-input" value="{{$dataPengadaan->ketua_tim}}"
-                                       id="direksi" id="ketua_tim" name="ketua_tim"
-                                       placeholder="Masukan Ketua Tim">
-                                <span class="m-form__help"></span>
                             </div>
                             <div class="col-lg-6">
                                 <label>

@@ -177,6 +177,8 @@ Route::group(['prefix'=>'user','middleware' => ['user']],function (){
             Route::get('download-eva-penawaran-rekap/{id}',  [DownloadControllerPj::class, 'downloadEvaPenawaranRekap']);
             Route::get('download-eva-penawaran-rekap-hasil/{id}',  [DownloadControllerPj::class, 'downloadEvaPenawaranRekapHasil']);
 
+            Route::get('download-spk/{id}',  [DownloadControllerPj::class, 'downloadSpk']);
+            Route::get('download-rks/{id}',  [DownloadControllerPj::class, 'downloadRks']);
 
 
 
