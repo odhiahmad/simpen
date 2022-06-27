@@ -170,7 +170,7 @@ class DownloadControllerSpk extends Controller
         $array = array(
             '[nomor]' => $dataDetail->undangan_pengadaan_langsung_nomor,
             '[tanggal]'=>$gabungan,
-            '[Alamat_Pt]' => $data['getperusahaan']['alamat'],
+            '[AlamatPt]' => $data['getperusahaan']['alamat'],
             '[Perusahaan]' => $data['getperusahaan']['nama'],
             '[Perusahaan1]' => $data['getperusahaan']['nama'],
             '[Judul]' => $data->judul,

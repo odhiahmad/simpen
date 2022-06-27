@@ -524,7 +524,6 @@ class JobCardController extends Controller
 
 
         $rules = array(
-            'tanggal_mulai' => 'required',
             'judul' => 'required',
             'no_proses' => 'required',
             'metode_pengadaan' => 'required',
@@ -686,7 +685,6 @@ class JobCardController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'tanggal_mulai' => 'required',
             'judul' => 'required',
             'no_proses' => 'required',
             'metode_pengadaan' => 'required',

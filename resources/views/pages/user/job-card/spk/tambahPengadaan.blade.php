@@ -120,7 +120,7 @@
                                     placeholder="Tanggal Nota Dinas"/>
                                 <span class="m-form__help"></span>
                             </div>
-                            <div class="col-lg-6">
+                            <!-- <div class="col-lg-6">
                                 <label>
                                     Tanggal Mulai:
                                 </label>
@@ -130,7 +130,7 @@
                                     type='text' class="form-control  m-input tanggal_mulai" readonly
                                     placeholder="Tanggal Mulai"/>
                                 <span class="m-form__help"></span>
-                            </div>
+                            </div> -->
                             <div class="col-lg-6">
                                 <label>
                                     Fungsi Pembangkit / Sarana
