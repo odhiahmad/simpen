@@ -13,6 +13,7 @@ use Novay\WordTemplate\WordTemplate;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use App\ModelsResource\DMetodePengadaan;
+use App\Http\Controllers\Template\TerbilangIndo;
 class DownloadControllerPj extends Controller
 {
 
@@ -350,31 +351,44 @@ class DownloadControllerPj extends Controller
         $data = Pengadaan::where('id', $id)->first();
         $dataDetail = PengadaanDetailPj::where('id_pengadaan', $id)->first();
         $perusahaan = Perusahaan::where('id', $data->id_perusahaan)->first();
-
+        $dataPekerjaan = DMetodePengadaan::where('id', $data->id_mp4)->first();
+        $dataTender = DMetodePengadaan::where('id', $data->id_mp2)->first();
         $tanggalIndo = new TanggalIndo();
+        $terbilangIndo = new TerbilangIndo();
 
         $tanggal = $tanggalIndo->tgl_aja($dataDetail->nd_usulan_penetapan_calon_pemenang_tgl);
         $bulan = $tanggalIndo->bln_aja($dataDetail->nd_usulan_penetapan_calon_pemenang_tgl);
         $tahun = $tanggalIndo->thn_aja($dataDetail->nd_usulan_penetapan_calon_pemenang_tgl);
         $gabungan = $tanggal . ' ' . $bulan . ' ' . $tahun;
 
-        $tanggal1 = $tanggalIndo->tgl_aja($dataDetail->addendum_rks_tgl);
-        $bulan1 = $tanggalIndo->bln_aja($dataDetail->addendum_rks_tgl);
-        $tahun1 = $tanggalIndo->thn_aja($dataDetail->addendum_rks_tgl);
+        $tanggal1 = $tanggalIndo->tgl_aja($dataDetail->rks_tgl);
+        $bulan1 = $tanggalIndo->bln_aja($dataDetail->rks_tgl);
+        $tahun1 = $tanggalIndo->thn_aja($dataDetail->rks_tgl);
         $gabungan1 = $tanggal1 . ' ' . $bulan1 . ' ' . $tahun1;
 
         $word = new WordTemplate();
         $file = public_path('doc/pj/usulan_penetapan_pemenang.rtf');
 
+        $hargaPenawaran = $data->harga_penawaran;
+        $hargaPenawaranTerbilang =  $terbilangIndo->terbilang($hargaPenawaran);
+        $jangawaktu = $data->jangka_waktu;
+        $jangkawaktuterbilang =  $terbilangIndo->terbilang($jangawaktu);
         $array = array(
             '[usulan_calon_nomor]' => $dataDetail->nd_usulan_penetapan_calon_pemenang_nomor,
             '[judul]' => $data->judul,
-            '[nomor_rks]' => $dataDetail->addendum_rks_nomor,
+            '[nomorrks]' => $dataDetail->rks_nomor,
             '[tanggal_gabungan_rks]' => $gabungan1,
             '[perusahaan_nama]' => $perusahaan->nama,
             '[perusahaan_alamat]' => $perusahaan->alamat,
             '[perusahaan_npwp]' => $perusahaan->npwp,
-            '[tanggal_gabungan_usulan]' => $gabungan
+            '[tanggal_gabungan_usulan]' => $gabungan,
+            '[metode]' => $dataPekerjaan->nama,
+            '[hargapenawaran]' => $data->harga_penawaran,
+            '[hargapenawaranterbilang]' =>$hargaPenawaranTerbilang,
+            '[tender]' => $dataTender->nama,
+            '[direksi]' => $data->direksi,
+            '[jangkawaktu]' =>$jangawaktu,
+            '[jangkawaktuterbilang]' => $jangkawaktuterbilang
         );
 
         $nama_file = 'usulan_penetapan_pemenang.doc';
@@ -387,7 +401,9 @@ class DownloadControllerPj extends Controller
         $data = Pengadaan::where('id', $id)->first();
         $dataDetail = PengadaanDetailPj::where('id_pengadaan', $id)->first();
         $perusahaan = Perusahaan::where('id', $data->id_perusahaan)->first();
-
+        $terbilangIndo = new TerbilangIndo();
+        $dataPekerjaan = DMetodePengadaan::where('id', $data->id_mp4)->first();
+        $dataTender = DMetodePengadaan::where('id', $data->id_mp2)->first();
         $tanggalIndo = new TanggalIndo();
 
         $tanggal = $tanggalIndo->tgl_aja($dataDetail->nd_penetapan_calon_pemenang_tgl);
@@ -400,18 +416,26 @@ class DownloadControllerPj extends Controller
         $tahun1 = $tanggalIndo->thn_aja($dataDetail->addendum_rks_tgl);
         $gabungan1 = $tanggal1 . ' ' . $bulan1 . ' ' . $tahun1;
 
+        $hargaPenawaran = $data->harga_penawaran;
+        $hargaPenawaranTerbilang =  $terbilangIndo->terbilang($hargaPenawaran);
+
         $word = new WordTemplate();
         $file = public_path('doc/pj/penetapan_pemenang.rtf');
 
         $array = array(
             '[pemenang_nomor]' => $dataDetail->nd_penetapan_calon_pemenang_nomor,
             '[judul]' => $data->judul,
-            '[nomor_rks]' => $dataDetail->addendum_rks_nomor,
+            '[nomorrks]' => $dataDetail->rks_nomor,
             '[tgl_gabungan_rks]' => $gabungan1,
             '[perusahaan_nama]' => $perusahaan->nama,
             '[perusahaan_alamat]' => $perusahaan->alamat,
             '[perusahaan_npwp]' => $perusahaan->npwp,
-            '[tgl_gabungan_pemenang]' => $gabungan
+            '[tgl_gabungan_pemenang]' => $gabungan,
+            '[hargapenawaran]' => $data->harga_penawaran,
+            '[hargapenawaranterbilang]' =>$hargaPenawaranTerbilang,
+            '[metode]' => $dataPekerjaan->nama,
+            '[tender]' => $dataTender->nama,
+            '[manager]' => $data->direksi
         );
 
         $nama_file = 'penetapan_pemenang.doc';
@@ -424,8 +448,9 @@ class DownloadControllerPj extends Controller
         $data = Pengadaan::where('id', $id)->first();
         $dataDetail = PengadaanDetailPj::where('id_pengadaan', $id)->first();
         $perusahaan = Perusahaan::where('id', $data->id_perusahaan)->first();
-
+        $dataTender = DMetodePengadaan::where('id', $data->id_mp2)->first();
         $tanggalIndo = new TanggalIndo();
+        $terbilangIndo = new TerbilangIndo();
 
         $tanggal = $tanggalIndo->tgl_aja($dataDetail->nd_usulan_penetapan_calon_pemenang_tgl);
         $bulan = $tanggalIndo->bln_aja($dataDetail->nd_usulan_penetapan_calon_pemenang_tgl);
@@ -459,6 +484,36 @@ class DownloadControllerPj extends Controller
         $tahun5 = $tanggalIndo->thn_aja($dataDetail->pengumuman_hasil_evaluasi_sampul_satu_tgl);
         $gabungan5 = $tanggal5 . ' ' . $bulan5 . ' ' . $tahun5;
 
+        $tanggal6 = $tanggalIndo->tgl_aja($dataDetail->pemasukan_dok_penawaran_tgl_dari);
+        $bulan6 = $tanggalIndo->bln_aja($dataDetail->pemasukan_dok_penawaran_tgl_dari);
+        $tahun6 = $tanggalIndo->thn_aja($dataDetail->pemasukan_dok_penawaran_tgl_dari);
+        $gabungan6 = $tanggal6 . ' ' . $bulan6 . ' ' . $tahun6;
+
+
+        $tanggal7 = $tanggalIndo->tgl_aja($dataDetail->pemasukan_dok_penawaran_tgl);
+        $bulan7 = $tanggalIndo->bln_aja($dataDetail->pemasukan_dok_penawaran_tgl);
+        $tahun7 = $tanggalIndo->thn_aja($dataDetail->pemasukan_dok_penawaran_tgl);
+        $gabungan7 = $tanggal7 . ' ' . $bulan7 . ' ' . $tahun7;
+
+        $tanggal8 = $tanggalIndo->tgl_aja($dataDetail->rks_tgl);
+        $bulan8 = $tanggalIndo->bln_aja($dataDetail->rks_tgl);
+        $tahun8 = $tanggalIndo->thn_aja($dataDetail->rks_tgl);
+        $gabungan8 = $tanggal8 . ' ' . $bulan8 . ' ' . $tahun8;
+
+        $tanggal9 = $tanggalIndo->tgl_aja($dataDetail->laporan_hasil_evaluasi_tgl);
+        $bulan9 = $tanggalIndo->bln_aja($dataDetail->laporan_hasil_evaluasi_tgl);
+        $tahun9 = $tanggalIndo->thn_aja($dataDetail->laporan_hasil_evaluasi_tgl);
+        $gabungan9 = $tanggal9 . ' ' . $bulan9 . ' ' . $tahun9;
+
+        
+        $hargaPenawaran = $data->harga_penawaran;
+        $hargaPenawaranTerbilang = $terbilangIndo->terbilang($hargaPenawaran);
+
+        $hargakontrak = $data->harga_kontrak;
+        $hargakontrakTerbilang = $terbilangIndo->terbilang($hargakontrak);
+
+        $jangawaktu = $data->jangka_waktu;
+        $jangkawaktuterbilang =  $terbilangIndo->terbilang($jangawaktu);
 
         $word = new WordTemplate();
         $file = public_path('doc/pj/laporan_hasil_evaluasi.rtf');
@@ -467,15 +522,33 @@ class DownloadControllerPj extends Controller
             '[judul]' => $data->judul,
             '[laporan_nomor]' => $dataDetail->laporan_hasil_evaluasi_nomor,
             '[rks_nomor]' => $dataDetail->addendum_rks_nomor,
-            '[rks_gabungan_tgl]' => $gabungan1,
+            '[rksgabungantgl]' => $gabungan1,
+            '[rks_awal_tgl]' => $gabungan8,
             '[pengumuman_nomor]' => $dataDetail->pengumuman_nomor,
             '[pengumuman_gabungan_tgl]' => $gabungan2,
             '[aanwijzing_nomor]' => $dataDetail->aanwijzing_nomor,
             '[aanwijzing_gabungan_tgl]' => $gabungan3,
             '[pembukaan_penawaran_sampul_dua_nomor]' => $dataDetail->pembukaan_penawaran_sampul_dua_nomor,
-            '[pembukaan_penawaran_sampul_dua_gabungan_tgl]' => $gabungan4,
+            '[gabunganempat]' => $gabungan4,
             '[pengumuman_hasil_evaluasi_sampul_satu_nomor]' => $dataDetail->pengumuman_hasil_evaluasi_sampul_satu_nomor,
-            '[pengumuman_hasil_evaluasi_sampul_satu_gabungan_tgl]' => $gabungan5,
+            '[gabunganlima]' => $gabungan5,
+            '[pemasukan_dok_penawaran_tgl_dari]' => $gabungan6,
+            '[pemasukan_dok_penawaran_tgl]' =>  $gabungan7,
+            '[laporan_hasil_evaluasi_tgl]' => $gabungan9,
+            '[pejabat_pelaksana]' => $data->pejabat_pelaksana,
+            '[assistant]' => $data->pic_pelaksana,
+            '[perusahaannama]' => $perusahaan->nama,
+            '[perusahaannpwp]' => $perusahaan->npwp,
+            '[perusahaanalamat]' => $perusahaan->alamat,
+            '[hargapenawaran]' => $hargaPenawaran,
+            '[hargapenawaranterbilang]' => $hargaPenawaranTerbilang,
+            '[hargakontrak]' => $hargakontrak,
+            '[hargakontrakterbilang]' => $hargakontrakTerbilang,
+            '[jangkawaktu]' =>$jangawaktu,
+            '[jangkawaktuterbilang]' => $jangkawaktuterbilang,
+            '[hps]' => $data->hps,
+            '[nilaijaminan]' =>  $data->nilai_jaminan,
+            '[tender]' => $dataTender->nama
 
         );
 
@@ -488,6 +561,8 @@ class DownloadControllerPj extends Controller
     {
         $data = Pengadaan::where('id', $id)->first();
         $dataDetail = PengadaanDetailPj::where('id_pengadaan', $id)->first();
+        $dataPekerjaan = DMetodePengadaan::where('id', $data->id_mp4)->first();
+        $dataTender = DMetodePengadaan::where('id', $data->id_mp2)->first();
 
         $tanggalIndo = new TanggalIndo();
 
@@ -496,9 +571,9 @@ class DownloadControllerPj extends Controller
         $tahun = $tanggalIndo->thn_aja($dataDetail->undangan_klarifikasi_dan_nego_penawaran_tgl);
         $gabungan = $tanggal . ' ' . $bulan . ' ' . $tahun;
 
-        $tanggal1 = $tanggalIndo->tgl_aja($dataDetail->addendum_rks_tgl);
-        $bulan1 = $tanggalIndo->bln_aja($dataDetail->addendum_rks_tgl);
-        $tahun1 = $tanggalIndo->thn_aja($dataDetail->addendum_rks_tgl);
+        $tanggal1 = $tanggalIndo->tgl_aja($dataDetail->rks_tgl);
+        $bulan1 = $tanggalIndo->bln_aja($dataDetail->rks_tgl);
+        $tahun1 = $tanggalIndo->thn_aja($dataDetail->rks_tgl);
         $gabungan1 = $tanggal1 . ' ' . $bulan1 . ' ' . $tahun1;
 
         $word = new WordTemplate();
@@ -506,12 +581,14 @@ class DownloadControllerPj extends Controller
 
         $array = array(
             '[nomor]' => $dataDetail->undangan_klarifikasi_dan_nego_penawaran_nomor,
-            '[rks_nomor]' => $dataDetail->addendum_rks_nomor,
+            '[rks_nomor]' => $dataDetail->rks_nomor,
             '[judul]' => $data->judul,
             '[hari]' => $dataDetail->undangan_klarifikasi_dan_nego_penawaran_hari,
             '[manager]' => $data->direksi,
             '[tanggal]' => $gabungan,
-            '[rks_gabungan_tgl]' => $gabungan1
+            '[rks_gabungan_tgl]' => $gabungan1,
+            '[metode]' => $dataPekerjaan->nama,
+            '[tender]' => $dataTender->nama
         );
 
         $nama_file = 'undangan_klarifikasi_negosiasi.doc';
@@ -578,34 +655,42 @@ class DownloadControllerPj extends Controller
         $data = Pengadaan::where('id', $id)->first();
         $dataDetail = PengadaanDetailPj::where('id_pengadaan', $id)->first();
         $perusahaan = Perusahaan::where('id', $data->id_perusahaan)->first();
-        $tanggalIndo = new TanggalIndo();
+        $dataTender = DMetodePengadaan::where('id', $data->id_mp2)->first();
 
+        $tanggalIndo = new TanggalIndo();
+      
         $tanggal = $tanggalIndo->tgl_aja($dataDetail->ba_hasil_klarifikasi_dan_nego_penawaran_tgl);
         $bulan = $tanggalIndo->bln_aja($dataDetail->ba_hasil_klarifikasi_dan_nego_penawaran_tgl);
         $tahun = $tanggalIndo->thn_aja($dataDetail->ba_hasil_klarifikasi_dan_nego_penawaran_tgl);
         $gabungan = $tanggal . ' ' . $bulan . ' ' . $tahun;
 
-        $tanggal1 = $tanggalIndo->tgl_aja($dataDetail->addendum_rks_tgl);
-        $bulan1 = $tanggalIndo->bln_aja($dataDetail->addendum_rks_tgl);
-        $tahun1 = $tanggalIndo->thn_aja($dataDetail->addendum_rks_tgl);
+        $tanggal1 = $tanggalIndo->tgl_aja($dataDetail->rks_tgl);
+        $bulan1 = $tanggalIndo->bln_aja($dataDetail->rks_tgl);
+        $tahun1 = $tanggalIndo->thn_aja($dataDetail->rks_tgl);
         $gabungan1 = $tanggal1 . ' ' . $bulan1 . ' ' . $tahun1;
 
-
+  
         $word = new WordTemplate();
         $file = public_path('doc/pj/klarifikasi_dan_nego/berita_acara_klarifikasi.rtf');
 
         $array = array(
             '[nomor]' => $dataDetail->ba_hasil_klarifikasi_dan_nego_penawaran_nomor,
-            '[rks_nomor]' => $dataDetail->addendum_rks_nomor,
+            '[rks_nomor]' => $dataDetail->rks_nomor,
             '[rks_tanggal]' => $gabungan1,
             '[hps]' => $data->hps,
-            '[penawaran]' => $data->harga_penawaran,
+            '[hari]' => $data->ba_hasil_klarifikasi_dan_nego_penawaran_hari,
+            '[tanggal]' => $tanggal,
+            '[bulan]' => $bulan,
+            '[tahun]' => $tahun,
+            '[penawaran]' =>$data->harga_penawaran,
             '[perusahaan_nama]' => $perusahaan->nama,
             '[perusahaan_alamat]' => $perusahaan->alamat,
             '[perusahaan_npwp]' => $perusahaan->npwp,
             '[perusahaan_pimpinan]' => $perusahaan->pimpinan,
             '[pejabat_pelaksana]' => $data->pejabat_pelaksana,
             '[manager]' => $data->direksi,
+            '[judul]' => $data->judul,
+            '[tender]' => $dataTender->nama
         );
 
         $nama_file = 'berita_acara_klarifikasi.doc';
@@ -619,17 +704,28 @@ class DownloadControllerPj extends Controller
         $dataDetail = PengadaanDetailPj::where('id_pengadaan', $id)->first();
         $perusahaan = Perusahaan::where('id', $data->id_perusahaan)->first();
 
+        $terbilangIndo = new TerbilangIndo();
         $spreadsheet = new Spreadsheet();
+        $orgDate = $dataDetail->rks_tgl;
+        $newDate = date("d-m-Y", strtotime($orgDate));  
+        $jangawaktu = $data->jangka_waktu;
+        $jangkawaktuterbilang =  $terbilangIndo->terbilang($jangawaktu);
 
         $loadFile = public_path('doc/pj/klarifikasi_dan_nego/rekapitulasi.xls');
         $sSheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($loadFile);
         $worksheet = $sSheet->getSheetByName('Hasil Koreksi');
-        $worksheet->setCellValue('A10', 'RKS No. : ' . $dataDetail->addendum_rks_nomor);
-        $worksheet->setCellValue('A9', 'Tanggal : ' . $dataDetail->addendum_rks_tgl);
+        $worksheet->setCellValue('A10', 'RKS No. : ' . $dataDetail->rks_nomor);
+        $worksheet->setCellValue('A7',  $data->judul);
+        $worksheet->setCellValue('A8', 'Tanggal : ' . $newDate);
 
         $worksheet->setCellValue('C43', $perusahaan->pimpinan);
+        $worksheet->setCellValue('C36', $perusahaan->nama);
+        $worksheet->setCellValue('D16', $perusahaan->nama);
+        $worksheet->setCellValue('C37', $perusahaan->sebutan_jabatan);
         $worksheet->setCellValue('G43', $data->pejabat_pelaksana);
         $worksheet->setCellValue('D52', $data->direksi);
+        $worksheet->setCellValue('B33', 'Hasil jangka waktu pelaksanaan untuk paket pekerjaan diatas selama : '.$jangawaktu.' ( '.$jangkawaktuterbilang.') hari kalender');
+        
 
         $date = date('d-m-y-' . substr((string)microtime(), 1, 8));
         $date = str_replace(".", "", $date);
@@ -887,12 +983,15 @@ class DownloadControllerPj extends Controller
 
         $spreadsheet = new Spreadsheet();
 
+        $orgDate = $dataDetail->pembukaan_penawaran_sampul_satu_tgl;
+        $newDate = date("d-m-Y", strtotime($orgDate));  
+
         $loadFile = public_path('doc/pj/pembukaan_dok/catatan_hasil.xls');
         $sSheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($loadFile);
         $worksheet = $sSheet->getSheetByName('Catatan Pembukaan');
         $worksheet->setCellValue('A7', $data->judul);
         $worksheet->setCellValue('A9', 'RKS No. : ' . $dataDetail->pembukaan_penawaran_sampul_satu_nomor);
-        $worksheet->setCellValue('A10', 'Tanggal : ' . $dataDetail->pembukaan_penawaran_sampul_satu_tgl);
+        $worksheet->setCellValue('A10', 'Tanggal : ' .  $newDate);
 
         $worksheet->setCellValue('H90', $data->pejabat_pelaksana);
 
@@ -1001,6 +1100,7 @@ class DownloadControllerPj extends Controller
         $data = Pengadaan::where('id', $id)->first();
         $dataDetail = PengadaanDetailPj::where('id_pengadaan', $id)->first();
         $dataPekerjaan = DMetodePengadaan::where('id', $data->id_mp4)->first();
+        $dataTender= DMetodePengadaan::where('id', $data->id_mp2)->first();
         $perusahaan = Perusahaan::where('id', $data->id_perusahaan)->first();
         $tanggalIndo = new TanggalIndo();
 
@@ -1009,9 +1109,9 @@ class DownloadControllerPj extends Controller
         $tahun = $tanggalIndo->thn_aja($dataDetail->evaluasi_dok_penawaran_sampul_satu_tgl);
         $gabungan = $tanggal . ' ' . $bulan . ' ' . $tahun;
 
-        $tanggal1 = $tanggalIndo->tgl_aja($dataDetail->addendum_rks_tgl);
-        $bulan1 = $tanggalIndo->bln_aja($dataDetail->addendum_rks_tgl);
-        $tahun1 = $tanggalIndo->thn_aja($dataDetail->addendum_rks_tgl);
+        $tanggal1 = $tanggalIndo->tgl_aja($dataDetail->rks_tgl);
+        $bulan1 = $tanggalIndo->bln_aja($dataDetail->rks_tgl);
+        $tahun1 = $tanggalIndo->thn_aja($dataDetail->rks_tgl);
         $gabungan1 = $tanggal1 . ' ' . $bulan1 . ' ' . $tahun1;
 
 
@@ -1021,15 +1121,17 @@ class DownloadControllerPj extends Controller
         $array = array(
             '[nomor]' => $dataDetail->evaluasi_dok_penawaran_sampul_satu_nomor,
             '[hari]' => $dataDetail->evaluasi_dok_penawaran_sampul_satu_hari,
-            '[rks_nomor]' => $dataDetail->addendum_rks_nomor,
+            '[rks_nomor]' => $dataDetail->rks_nomor,
             '[rks_tanggal]' => $gabungan1,
             '[judul]' => $data->judul,
+            '[jabatan_direksi]' => $data->jabatan_direksi,
             '[pejabat_pelaksana]' => $data->pejabat_pelaksana,
             '[manager]' => $data->direksi,
             '[tanggal]' => $tanggal,
             '[bulan]' => $bulan,
             '[tahun]' => $tahun,
-            '[metode]' => $dataPekerjaan->metode,
+            '[metode]' => $dataPekerjaan->nama,
+            '[tender]' => $dataTender->nama
 
 
         );
@@ -1046,13 +1148,16 @@ class DownloadControllerPj extends Controller
         $perusahaan = Perusahaan::where('id', $data->id_perusahaan)->first();
 
         $spreadsheet = new Spreadsheet();
+        $orgDate = $dataDetail->evaluasi_dok_penawaran_sampul_satu_tgl;
+        $newDate = date("d-m-Y", strtotime($orgDate));  
 
         $loadFile = public_path('doc/pj/evaluasi_sampul_satu/rekap_hasil_penilaian.xls');
         $sSheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($loadFile);
         $worksheet = $sSheet->getSheetByName('Catatan Eva Adm');
+        $worksheet->setCellValue('A7', $data->judul);
         $worksheet->setCellValue('A9', 'RKS No. : ' . $dataDetail->evaluasi_dok_penawaran_sampul_satu_nomor);
-        $worksheet->setCellValue('A10', 'Tanggal : ' . $dataDetail->evaluasi_dok_penawaran_sampul_satu_tgl);
-
+        $worksheet->setCellValue('A10', 'Tanggal : ' .  $newDate);
+        $worksheet->setCellValue('D44', $data->jabatan_direksi);
         $worksheet->setCellValue('D50', $data->direksi);
         $worksheet->setCellValue('G50', $data->pejabat_pelaksana);
 
@@ -1102,6 +1207,7 @@ class DownloadControllerPj extends Controller
     {
         $data = Pengadaan::where('id', $id)->first();
         $dataPekerjaan = DMetodePengadaan::where('id', $data->id_mp4)->first();
+        $dataTender = DMetodePengadaan::where('id', $data->id_mp2)->first();
         $dataDetail = PengadaanDetailPj::where('id_pengadaan', $id)->first();
         $perusahaan = Perusahaan::where('id', $data->id_perusahaan)->first();
         $tanggalIndo = new TanggalIndo();
@@ -1111,9 +1217,9 @@ class DownloadControllerPj extends Controller
         $tahun = $tanggalIndo->thn_aja($dataDetail->pembukaan_penawaran_sampul_dua_tgl);
         $gabungan = $tanggal . ' ' . $bulan . ' ' . $tahun;
 
-        $tanggal1 = $tanggalIndo->tgl_aja($dataDetail->addendum_rks_tgl);
-        $bulan1 = $tanggalIndo->bln_aja($dataDetail->addendum_rks_tgl);
-        $tahun1 = $tanggalIndo->thn_aja($dataDetail->addendum_rks_tgl);
+        $tanggal1 = $tanggalIndo->tgl_aja($dataDetail->rks_tgl);
+        $bulan1 = $tanggalIndo->bln_aja($dataDetail->rks_tgl);
+        $tahun1 = $tanggalIndo->thn_aja($dataDetail->rks_tgl);
         $gabungan1 = $tanggal1 . ' ' . $bulan1 . ' ' . $tahun1;
 
 
@@ -1123,7 +1229,7 @@ class DownloadControllerPj extends Controller
         $array = array(
             '[nomor]' => $dataDetail->pembukaan_penawaran_sampul_dua_nomor,
             '[hari]' => $dataDetail->pembukaan_penawaran_sampul_dua_hari,
-            '[rks_nomor]' => $dataDetail->addendum_rks_nomor,
+            '[rks_nomor]' => $dataDetail->rks_nomor,
             '[rks_tanggal]' => $gabungan1,
             '[judul]' => $data->judul,
             '[pejabat_pelaksana]' => $data->pejabat_pelaksana,
@@ -1131,6 +1237,7 @@ class DownloadControllerPj extends Controller
             '[bulan]' => $bulan,
             '[tahun]' => $tahun,
             '[metode]' => $dataPekerjaan->nama,
+            '[tender]' => $dataTender->nama
 
 
         );
@@ -1146,6 +1253,7 @@ class DownloadControllerPj extends Controller
         $dataDetail = PengadaanDetailPj::where('id_pengadaan', $id)->first();
         $perusahaan = Perusahaan::where('id', $data->id_perusahaan)->first();
         $tanggalIndo = new TanggalIndo();
+        $dataTender = DMetodePengadaan::where('id', $data->id_mp2)->first();
 
         $tanggal = $tanggalIndo->tgl_aja($dataDetail->pembukaan_penawaran_sampul_dua_tgl);
         $bulan = $tanggalIndo->bln_aja($dataDetail->pembukaan_penawaran_sampul_dua_tgl);
@@ -1161,7 +1269,8 @@ class DownloadControllerPj extends Controller
             '[hari]' => $dataDetail->pembukaan_penawaran_sampul_dua_hari,
             '[manager]' => $data->direksi,
             '[tanggal]' => $gabungan,
-            '[judul]' => $data->judul
+            '[judul]' => $data->judul,
+            '[tender]' => $dataTender->nama
 
 
         );
@@ -1259,15 +1368,15 @@ class DownloadControllerPj extends Controller
         $dataDetail = PengadaanDetailPj::where('id_pengadaan', $id)->first();
         $perusahaan = Perusahaan::where('id', $data->id_perusahaan)->first();
         $tanggalIndo = new TanggalIndo();
-
+        $dataTender = DMetodePengadaan::where('id', $data->id_mp2)->first();
         $tanggal = $tanggalIndo->tgl_aja($dataDetail->evaluasi_dok_penawaran_sampul_dua_tgl);
         $bulan = $tanggalIndo->bln_aja($dataDetail->evaluasi_dok_penawaran_sampul_dua_tgl);
         $tahun = $tanggalIndo->thn_aja($dataDetail->evaluasi_dok_penawaran_sampul_dua_tgl);
         $gabungan = $tanggal . ' ' . $bulan . ' ' . $tahun;
 
-        $tanggal1 = $tanggalIndo->tgl_aja($dataDetail->addendum_rks_tgl);
-        $bulan1 = $tanggalIndo->bln_aja($dataDetail->addendum_rks_tgl);
-        $tahun1 = $tanggalIndo->thn_aja($dataDetail->addendum_rks_tgl);
+        $tanggal1 = $tanggalIndo->tgl_aja($dataDetail->rks_tgl);
+        $bulan1 = $tanggalIndo->bln_aja($dataDetail->rks_tgl);
+        $tahun1 = $tanggalIndo->thn_aja($dataDetail->rks_tgl);
         $gabungan1 = $tanggal1 . ' ' . $bulan1 . ' ' . $tahun1;
 
 
@@ -1277,14 +1386,15 @@ class DownloadControllerPj extends Controller
         $array = array(
             '[nomor]' => $dataDetail->evaluasi_dok_penawaran_sampul_dua_nomor,
             '[hari]' => $dataDetail->evaluasi_dok_penawaran_sampul_dua_hari,
-            '[rks_nomor]' => $dataDetail->addendum_rks_nomor,
+            '[rks_nomor]' => $dataDetail->rks_nomor,
             '[rks_tanggal]' => $gabungan1,
             '[judul]' => $data->judul,
             '[pejabat_pelaksana]' => $data->pejabat_pelaksana,
             '[manager]' => $data->direksi,
             '[tanggal]' => $tanggal,
             '[bulan]' => $bulan,
-            '[tahun]' => $tahun
+            '[tahun]' => $tahun,
+            '[tender]' => $dataTender->nama
 
 
         );
@@ -1304,10 +1414,11 @@ class DownloadControllerPj extends Controller
         $newDate = date("d-m-Y", strtotime($orgDate));  
         $spreadsheet = new Spreadsheet();
 
+        
         $loadFile = public_path('doc/pj/evaluasi_sampul_dua/rekap_hasil.xls');
         $sSheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($loadFile);
         $worksheet = $sSheet->getSheetByName('Catatan Eva Harga');
-        $worksheet->setCellValue('A7', 'RKS No. : ' . $data->judul);
+        $worksheet->setCellValue('A7', $data->judul);
         $worksheet->setCellValue('A9', 'RKS No. : ' . $dataDetail->evaluasi_dok_penawaran_sampul_dua_nomor);
         $worksheet->setCellValue('A10', 'Tanggal : ' . $newDate);
 
@@ -1388,6 +1499,8 @@ class DownloadControllerPj extends Controller
         $data = Pengadaan::where('id', $id)->first();
         $dataDetail = PengadaanDetailPj::where('id_pengadaan', $id)->first();
         $perusahaan = Perusahaan::where('id', $data->id_perusahaan)->first();
+        $terbilangIndo = new TerbilangIndo();
+        $dataTender = DMetodePengadaan::where('id', $data->id_mp2)->first();
 
         $tanggalIndo = new TanggalIndo();
 
@@ -1407,8 +1520,20 @@ class DownloadControllerPj extends Controller
         $tahun2 = $tanggalIndo->thn_aja($dataDetail->nd_penetapan_calon_pemenang_tgl);
         $gabungan2 = $tanggal2 . ' ' . $bulan2 . ' ' . $tahun2;
 
+        $tanggal3 = $tanggalIndo->tgl_aja($dataDetail->skkp_tgl);
+        $bulan3 = $tanggalIndo->bln_aja($dataDetail->skkp_tgl);
+        $tahun3 = $tanggalIndo->thn_aja($dataDetail->skkp_tgl);
+        $gabungan3 = $tanggal3 . ' ' . $bulan3 . ' ' . $tahun3;
+
         $word = new WordTemplate();
         $file = public_path('doc/pj/skpp.rtf');
+        
+
+        $hargaPenawaran = $data->harga_penawaran;
+        $hargaPenawaranTerbilang = $terbilangIndo->terbilang($hargaPenawaran);
+
+        $hargakontrak = $data->harga_kontrak;
+        $hargakontrakTerbilang = $terbilangIndo->terbilang($hargakontrak);
 
         $array = array(
             '[nomor]' => $dataDetail->skkp_nomor,
@@ -1423,6 +1548,13 @@ class DownloadControllerPj extends Controller
             '[perusahaan_jalan]' => $perusahaan->alamat,
             '[perusahaan_npwp]' => $perusahaan->npwp,
             '[pejabat_pelaksana]' => $data->pejabat_pelaksana,
+            '[hargapenawaran]' => $hargaPenawaran,
+            '[hargapenawaranterbilang]' => $hargaPenawaranTerbilang,
+            '[hargakontrak]' => $hargakontrak,
+            '[hargakontrakterbilang]' => $hargakontrakTerbilang,
+            '[tender]' => $dataTender->nama,
+            '[skpptanggal]' => $gabungan3
+
 
 
         );
@@ -1437,7 +1569,7 @@ class DownloadControllerPj extends Controller
         $data = Pengadaan::where('id', $id)->first();
         $dataDetail = PengadaanDetailPj::where('id_pengadaan', $id)->first();
         $perusahaan = Perusahaan::where('id', $data->id_perusahaan)->first();
-
+        $terbilangIndo = new TerbilangIndo();
         $tanggalIndo = new TanggalIndo();
 
 
@@ -1459,6 +1591,9 @@ class DownloadControllerPj extends Controller
         $word = new WordTemplate();
         $file = public_path('doc/pj/penunjukan_pemenang.rtf');
 
+        $hargaPenawaran = $data->harga_penawaran;
+        $hargaPenawaranTerbilang = $terbilangIndo->terbilang($hargaPenawaran);
+
         $array = array(
             '[nomor]' => $dataDetail->penunjukan_pemenang_nomor,
             '[tanggal]' => $gabungan,
@@ -1469,6 +1604,8 @@ class DownloadControllerPj extends Controller
             '[perusahaan_alamat]' => $perusahaan->alamat,
             '[perusahaan_npwp]' => $perusahaan->npwp,
             '[manager]' => $data->direksi,
+            '[hargapenawaran]' => $hargaPenawaran,
+            '[hargapenawaranTerbilang]' => $hargaPenawaranTerbilang
 
 
         );
@@ -1483,7 +1620,7 @@ class DownloadControllerPj extends Controller
         $data = Pengadaan::where('id', $id)->first();
         $dataDetail = PengadaanDetailPj::where('id_pengadaan', $id)->first();
         $perusahaan = Perusahaan::where('id', $data->id_perusahaan)->first();
-
+        $dataTender = DMetodePengadaan::where('id', $data->id_mp2)->first();
         $tanggalIndo = new TanggalIndo();
 
 
@@ -1515,6 +1652,7 @@ class DownloadControllerPj extends Controller
             '[perusahaan_alamat]' => $perusahaan->alamat,
             '[perusahaan_npwp]' => $perusahaan->npwp,
             '[pejabat_pelaksana]' => $data->pejabat_pelaksana,
+            '[tender]' => $dataTender->nama
 
 
         );
@@ -1680,6 +1818,7 @@ class DownloadControllerPj extends Controller
             '[tanggal]' => $tanggal,
             '[bulan]' => $bulan,
             '[tahun]' => $tahun,
+            '[Judul]' => $data->judul,
             '[pejabat_pelaksana]' => $data->pejabat_pelaksana
         );
 
@@ -1789,6 +1928,8 @@ class DownloadControllerPj extends Controller
         $spreadsheet = new Spreadsheet();
         $orgDate = $dataDetail->evaluasi_dok_penawaran_sampul_dua_tgl;
         $newDate = date("d-m-Y", strtotime($orgDate));  
+
+
         $loadFile = public_path('doc/pj/pembukaan_penawaran/catatan.xls');
         $sSheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($loadFile);
         $worksheet = $sSheet->getSheetByName('Catatan Pembukaan');
@@ -1922,19 +2063,23 @@ class DownloadControllerPj extends Controller
         $perusahaan = Perusahaan::where('id', $data->id_perusahaan)->first();
 
         $spreadsheet = new Spreadsheet();
+        $orgDate = $dataDetail->evaluasi_dok_penawaran_sampul_dua_tgl;
+        $newDate = date("d-m-Y", strtotime($orgDate));  
+
+
 
         $loadFile = public_path('doc/pj/evaluasi_penawaran/catatan.xls');
         $sSheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($loadFile);
         $worksheet = $sSheet->getSheetByName('Hasil Koreksi');
         $worksheet->setCellValue('A7', $data->judul);
         $worksheet->setCellValue('A9', 'RKS No. : ' . $dataDetail->evaluasi_dok_penawaran_sampul_dua_nomor);
-        $worksheet->setCellValue('A10', 'Tanggal : ' . $dataDetail->evaluasi_dok_penawaran_sampul_dua_tgl);
+        $worksheet->setCellValue('A10', 'Tanggal : ' . $newDate);
 
 
         $worksheet1 = $sSheet->getSheetByName('Kertas Kerja');
         $worksheet1->setCellValue('A3', $data->judul);
         $worksheet1->setCellValue('A6', 'RKS No. : ' . $dataDetail->evaluasi_dok_penawaran_sampul_dua_nomor);
-        $worksheet1->setCellValue('A7', 'Tanggal : ' . $dataDetail->evaluasi_dok_penawaran_sampul_dua_tgl);
+        $worksheet1->setCellValue('A7', 'Tanggal : ' . $newDate);
 
         $worksheet1->setCellValue('I48', $data->pejabat_pelaksana);
 
@@ -1993,13 +2138,15 @@ class DownloadControllerPj extends Controller
         $perusahaan = Perusahaan::where('id', $data->id_perusahaan)->first();
 
         $spreadsheet = new Spreadsheet();
+  $orgDate = $dataDetail->evaluasi_dok_penawaran_sampul_dua_tgl;
+        $newDate = date("d-m-Y", strtotime($orgDate));  
 
         $loadFile = public_path('doc/pj/evaluasi_penawaran/rekap.xls');
         $sSheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($loadFile);
         $worksheet = $sSheet->getSheetByName('Catatan Eva Adm');
         $worksheet->setCellValue('A7', $data->judul);
         $worksheet->setCellValue('A9', 'RKS No. : ' . $dataDetail->evaluasi_dok_penawaran_sampul_dua_nomor);
-        $worksheet->setCellValue('A10', 'Tanggal : ' . $dataDetail->evaluasi_dok_penawaran_sampul_dua_tgl);
+        $worksheet->setCellValue('A10', 'Tanggal : ' . $newDate);
         $worksheet->setCellValue('D50', $data->direksi);
         $worksheet->setCellValue('D44', $data->jabatan_direksi);
         $worksheet->setCellValue('G50', $data->pejabat_pelaksana);
@@ -2033,18 +2180,24 @@ class DownloadControllerPj extends Controller
 
         $spreadsheet = new Spreadsheet();
 
+        $orgDate = $dataDetail->evaluasi_dok_penawaran_sampul_dua_tgl;
+        $newDate = date("d-m-Y", strtotime($orgDate));  
+
+
         $loadFile = public_path('doc/pj/evaluasi_penawaran/rekap_hasil.xls');
         $sSheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($loadFile);
         $worksheet = $sSheet->getSheetByName('Catatan Eva Harga');
         $worksheet->setCellValue('A7', $data->judul);
         $worksheet->setCellValue('A9', 'RKS No. : ' . $dataDetail->evaluasi_dok_penawaran_sampul_dua_nomor);
-        $worksheet->setCellValue('A10', 'Tanggal : ' . $dataDetail->evaluasi_dok_penawaran_sampul_dua_tgl);
+        $worksheet->setCellValue('A10', 'Tanggal : ' . $newDate);
+       
         $worksheet->setCellValue('F42', $data->pejabat_pelaksana);
 
         $worksheet1 = $sSheet->getSheetByName('Hasil Koreksi');
         $worksheet1->setCellValue('A7', $data->judul);
         $worksheet1->setCellValue('A9', 'RKS No. : ' . $dataDetail->evaluasi_dok_penawaran_sampul_dua_nomor);
-        $worksheet1->setCellValue('A10', 'Tanggal : ' . $dataDetail->evaluasi_dok_penawaran_sampul_dua_tgl);
+        $worksheet1->setCellValue('A10', 'Tanggal : ' . $newDate);
+     
         $worksheet1->setCellValue('H53', $data->pejabat_pelaksana);
 
 
