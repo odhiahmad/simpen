@@ -542,14 +542,7 @@
                        class="dropdown-item">
                         Undangan
                     </a>
-                    <a href="{!!url('user/jobcard/pj/download-form-daftar-hadir-pelaksana/' . $dataPengadaan->id )!!}"
-                       class="dropdown-item">
-                        Form Data Hadir Pelaksana
-                    </a>
-                    <a href="{!!url('user/jobcard/pj/download-form-daftar-hadir-penyedia/' . $dataPengadaan->id )!!}"
-                       class="dropdown-item">
-                        Form Data Hadir Penyedia
-                    </a>
+                  
                 </div>
             </div>
         @endif
@@ -602,6 +595,14 @@
                     <a href="{!!url('user/jobcard/pj/download-rekapitulasi/' . $dataPengadaan->id )!!}"
                        class="dropdown-item">
                         Rekapitulasi
+                    </a>
+                    <a href="{!!url('user/jobcard/pj/download-form-daftar-hadir-pelaksana/' . $dataPengadaan->id )!!}"
+                       class="dropdown-item">
+                        Form Data Hadir Pelaksana
+                    </a>
+                    <a href="{!!url('user/jobcard/pj/download-form-daftar-hadir-penyedia/' . $dataPengadaan->id )!!}"
+                       class="dropdown-item">
+                        Form Data Hadir Penyedia
                     </a>
                 </div>
             </div>
