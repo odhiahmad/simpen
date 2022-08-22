@@ -120,7 +120,7 @@ class JobCardSpbjController extends Controller
     public function indexMonitoring()
     {
         if (request()->ajax()) {
-            return DataTables::of(Pengadaan::with(['getMp1', 'getMp2'])->latest()->get())
+            return DataTables::of(Pengadaan::with(['getMp1', 'getMp2'])->where(['id_mp1' => '3'])->orWhere(['id_mp1' => '2'])->latest()->get())
                 ->addColumn('action', function ($data) {
                     $button = '';
 

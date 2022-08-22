@@ -224,7 +224,7 @@
 												</span>
                                                 </a>
                                             </li>
-                                            <li class="m-menu__item"
+                                            <!-- <li class="m-menu__item"
                                                 data-menu-submenu-toggle="hover" data-redirect="true"
                                                 aria-haspopup="true">
                                                 <a href='{!! url('user/jobcard/pj/index'); !!}'
@@ -234,7 +234,7 @@
 													PJ
 												</span>
                                                 </a>
-                                            </li>
+                                            </li> -->
                                             <li class="m-menu__item"
                                                 data-menu-submenu-toggle="hover" data-redirect="true"
                                                 aria-haspopup="true">
@@ -276,7 +276,7 @@
                                     <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left">
                                         <span class="m-menu__arrow m-menu__arrow--adjust"></span>
                                         <ul class="m-menu__subnav">
-                                            <li class="m-menu__item"
+                                            <!-- <li class="m-menu__item"
                                                 data-menu-submenu-toggle="hover" data-redirect="true"
                                                 aria-haspopup="true">
                                                 <a href='{!! url('user/monitoring-kontrak/pj/index'); !!}'
@@ -286,7 +286,7 @@
 													PJ
 												</span>
                                                 </a>
-                                            </li>
+                                            </li> -->
                                             <li class="m-menu__item"
                                                 data-menu-submenu-toggle="hover" data-redirect="true"
                                                 aria-haspopup="true">
